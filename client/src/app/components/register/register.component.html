@@ -1,0 +1,30 @@
+<div class="wrapper fadeInDown">
+   <div id="formContent">
+      <div class="fadeInFirst">
+         <h1>New User</h1>
+      </div>
+
+      <!-- Register Form -->
+      <form>
+         <input type="text" [(ngModel)] = "credentials.name" id="name" class="fadeIn second" name="name" placeholder="first name">
+         <input type="text"  id="lname" class="fadeIn third" name="lname" placeholder="last name">
+         <input type="text" [(ngModel)] = "credentials.email" id="email" class="fadeIn fourth" name="email" placeholder="email">
+         <input type="password" [(ngModel)] = "credentials.password" id="password" class="fadeIn fifth" name="password" placeholder="password">
+         <input type="password" id="passagain" class="fadeIn sixth" name="passagain" placeholder="enter password again">
+         <input type="text"  id="program" class="fadeIn seventh" name="program" placeholder="program">
+         <section class="example-section">
+               <label class="full-width">Do you want to be a book uploader?</label>
+               <br>
+               <br>
+         <mat-radio-group>
+               <mat-radio-button class="example-margin" value="after">Yes</mat-radio-button>
+               <mat-radio-button class="example-margin" value="before">No</mat-radio-button>
+         </mat-radio-group>
+         </section>
+         <br>
+         <br>
+         <input type="submit" class="fadeIn seventh" value="Register" (click)="registerUser();">
+         <input type="button" class="fadeIn seventh" value="login" routerLink="/login">
+      </form>
+   </div>
+</div>

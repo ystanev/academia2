@@ -1,5 +1,6 @@
 var passport = require('passport');
 var mongoose = require('mongoose');
+//var Role = require('../models/roles');
 var User = mongoose.model('User');
 
 var sendJSONresponse = function(res, status, content) {
@@ -9,18 +10,31 @@ var sendJSONresponse = function(res, status, content) {
 
 module.exports.register = function(req, res) {
 
-  // if(!req.body.name || !req.body.email || !req.body.password) {
-  //   sendJSONresponse(res, 400, {
-  //     "message": "All fields required"
-  //   });
-  //   return;
-  // }
+  /*if(!user.fname || !user.lname ||!user.email || !user.program || !req.body.password ) {
+     sendJSONresponse(res, 400, {
+       "message": "All fields required",
+     });
+     return;
+  }*/
+
+  //let errors = [];
 
   var user = new User();
+  /*
+  var role = new Role({
+    roleDesc: 'user'
+  });*/
 
-  user.name = req.body.name;
+  user.fname = req.body.fname;
+  user.lname = req.body.lname;
   user.email = req.body.email;
-
+  user.program = req.body.program;
+  user.roles.roleDesc = 'normalUser';
+  
+  //user.roles.setText('user');
+  //user.roles.push('user');
+  //user.roles = role._id;
+  
   user.setPassword(req.body.password);
 
   user.save(function(err) {

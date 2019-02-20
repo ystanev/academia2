@@ -13,8 +13,11 @@ export class RegisterComponent implements OnInit {
 
   credentials: TokenPayload = {
     email: '',
-    name: '',
-    password: ''
+    fname: '',
+    lname: '',  
+    password: '',
+    //roles: '',
+    program: ''
   };
   /*
   public user: User;
@@ -27,6 +30,10 @@ export class RegisterComponent implements OnInit {
   constructor(private auth: AuthenticationService, private router: Router) {}
   
   ngOnInit() {
+    if (this.auth.isLoggedIn()) {
+      this.router.navigateByUrl('/home');
+      return false;
+    }
   }
   
   /*

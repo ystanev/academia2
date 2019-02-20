@@ -28,6 +28,11 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
+
+    if (this.auth.isLoggedIn()) {
+      this.router.navigateByUrl('/home');
+      return false;
+    }
   }
 
 /*
@@ -56,6 +61,6 @@ export class LoginComponent implements OnInit {
     }, (err) => {
       console.error(err);
     }); 
-  }
+  };
   
 }

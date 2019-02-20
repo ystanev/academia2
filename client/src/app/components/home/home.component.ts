@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
     }, (err) => {
       console.error(err);
     });
+
   }
 
 }

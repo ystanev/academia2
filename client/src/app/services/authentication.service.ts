@@ -9,8 +9,8 @@ export interface UserDetails {
   email: string;
   fname: string;
   lname: string;
-  //roles: string;
   program: string;
+  roles: string;
   exp: number;
   iat: number;
 }
@@ -24,8 +24,8 @@ export interface TokenPayload {
   password: string;
   fname?: string;
   lname?: string;
-  //roles?: string;
   program?: string;
+  roles?:string;
 }
 
 @Injectable({

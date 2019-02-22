@@ -1,6 +1,6 @@
 var passport = require('passport');
 var mongoose = require('mongoose');
-//var Role = require('../models/roles');
+//var Role = mongoose.model('Role');
 var User = mongoose.model('User');
 
 var sendJSONresponse = function(res, status, content) {
@@ -20,16 +20,15 @@ module.exports.register = function(req, res) {
   //let errors = [];
 
   var user = new User();
-  /*
-  var role = new Role({
-    roleDesc: 'user'
-  });*/
+  //var role = new Role();
 
   user.fname = req.body.fname;
   user.lname = req.body.lname;
   user.email = req.body.email;
   user.program = req.body.program;
-  user.roles.roleDesc = 'normalUser';
+
+
+  //user.roles.roleDesc = req.body.roles;
   
   //user.roles.setText('user');
   //user.roles.push('user');

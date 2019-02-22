@@ -30,7 +30,11 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
     if (this.auth.isLoggedIn()) {
-      this.router.navigateByUrl('/home');
+      if(this.credentials.email == 'admin'){
+        this.router.navigateByUrl('/admin');
+      }else{
+        this.router.navigateByUrl('/home');
+      }
       return false;
     }
   }
@@ -57,7 +61,11 @@ export class LoginComponent implements OnInit {
   
   validateLogin() {
     this.auth.login(this.credentials).subscribe(() => {
-      this.router.navigateByUrl('/home');
+      if(this.credentials.email == 'admin'){
+        this.router.navigateByUrl('/admin');
+      }else{
+        this.router.navigateByUrl('/home');
+      }
     }, (err) => {
       console.error(err);
     }); 

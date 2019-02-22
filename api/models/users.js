@@ -7,8 +7,6 @@ var userSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required: true,
-    match: [/\S+@\S+\.\S+/],
-    index: true
   },
   fname: {
     type: String,
@@ -22,10 +20,10 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  roles: [{
+  roles: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Role'
-  }],
+  },
   hash: String,
   salt: String
 }, {timestamps: true});

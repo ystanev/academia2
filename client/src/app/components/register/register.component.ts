@@ -16,8 +16,8 @@ export class RegisterComponent implements OnInit {
     fname: '',
     lname: '',  
     password: '',
-    //roles: '',
-    program: ''
+    program: '',
+    roles: 'normalUser'
   };
   /*
   public user: User;
@@ -33,6 +33,8 @@ export class RegisterComponent implements OnInit {
     if (this.auth.isLoggedIn()) {
       this.router.navigateByUrl('/home');
       return false;
+    }else {
+      
     }
   }
   

@@ -13,6 +13,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AdminComponent } from './components/admin/admin.component';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { UserboardComponent } from './components/home/userboard/userboard.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { AdminComponent } from './components/admin/admin.component';
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    AdminComponent
+    AdminComponent,
+    DashboardComponent,
+    UserboardComponent
   ],
   imports: [
     BrowserModule,

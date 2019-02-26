@@ -30,12 +30,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
     if (this.auth.isLoggedIn()) {
-      if(this.credentials.email == 'admin'){
-        this.router.navigateByUrl('/admin');
+      if(this.credentials.email === 'admin'){
+        this.router.navigate(['/admin']);
       }else{
-        this.router.navigateByUrl('/home');
+        this.router.navigate(['/home']);
       }
-      return false;
+      return true;
     }
   }
 
@@ -60,15 +60,27 @@ export class LoginComponent implements OnInit {
   */
   
   validateLogin() {
-    this.auth.login(this.credentials).subscribe(() => {
-      if(this.credentials.email == 'admin'){
-        this.router.navigateByUrl('/admin');
-      }else{
-        this.router.navigateByUrl('/home');
-      }
-    }, (err) => {
-      console.error(err);
-    }); 
+    if(this.credentials.email && this.credentials.password){
+      this.auth.login(this.credentials).subscribe(result => {
+        console.log('result is ', result);
+        if(this.credentials.email === 'admin'){
+          this.router.navigate(['/admin']);
+        }else {
+          this.router.navigate(['/home']);
+        }
+        /*if(result['status'] === 'success') {
+         
+        }else {
+          alert('Wrong username or password ');
+        }*/
+        
+      }, (err) => {
+        console.error(err);
+      }); 
+    } else {
+      alert('enter email and password');
+    }
+    
   };
   
 }

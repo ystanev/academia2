@@ -15,6 +15,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AdminComponent } from './components/admin/admin.component';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { UserboardComponent } from './components/home/userboard/userboard.component';
+import { UploadComponent } from './components/home/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { UserboardComponent } from './components/home/userboard/userboard.compon
     HomeComponent,
     AdminComponent,
     DashboardComponent,
-    UserboardComponent
+    UserboardComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,

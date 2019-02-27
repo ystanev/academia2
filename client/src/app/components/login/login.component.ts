@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       if(this.credentials.email === 'admin'){
         this.router.navigate(['/admin']);
       }else{
-        this.router.navigate(['/home']);
+        //this.router.navigate(['/home']);
       }
       return true;
     }

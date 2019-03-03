@@ -14,6 +14,9 @@ import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AdminComponent } from './components/admin/admin.component';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { AllUsersComponent } from './components/admin/user/allUsers.component';
+import { AllBooksComponent } from './components/admin/books/allBooks.component';
+import { AllProgramsComponent } from './components/admin/programs/allPrograms.component';
 import { UserboardComponent } from './components/home/userboard/userboard.component';
 import { UploadComponent } from './components/home/upload/upload.component';
 
@@ -26,6 +29,9 @@ import { UploadComponent } from './components/home/upload/upload.component';
     AdminComponent,
     DashboardComponent,
     UserboardComponent,
+    AllUsersComponent,
+    AllBooksComponent,
+    AllProgramsComponent,
     UploadComponent
   ],
   imports: [

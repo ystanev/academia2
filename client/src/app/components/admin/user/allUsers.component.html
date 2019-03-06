@@ -1,18 +1,20 @@
 <table class="table" style="margin-left:-15px;">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Program Name</th>
+        <th class="col-xl-2 col-lg-2 col-sm-2 col-2">First Name</th>
+        <th class="col-xl-2 col-lg-2 col-sm-2 col-2">Last Name</th>
+        <th class="col-xl-2 col-lg-2 col-sm-2 col-2">Email</th>
+        <th class="col-xl-2v col-lg-2 col-sm-2 col-2">Program Name</th>
+        <th class="col-xl-2 col-lg-2 col-sm-2 col-2"></th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>{{details?.fname}}</td>
-        <td>{{details?.lname}}</td>
-        <td>{{details?.email}}</td>
-        <td>{{details?.program}}</td>
+      <tr *ngFor="let items of allUsrs">
+        <td>{{items.fname}}</td>
+        <td>{{items.lname}}</td>
+        <td>{{items.email}}</td>
+        <td>{{items.program}}</td>
+        <td><a href="#"><i class="material-icons">delete</i></a></td>
       </tr>
     </tbody>
   </table>

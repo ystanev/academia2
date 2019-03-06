@@ -69,7 +69,7 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: TokenPayload): Observable<any> {
+  private request(method: 'post'|'get', type: 'login'|'register'|'profile'|'user', user?: TokenPayload): Observable<any> {
     let base;
 
     if (method === 'post') {
@@ -100,6 +100,10 @@ export class AuthenticationService {
 
   public profile(): Observable<any> {
     return this.request('get', 'profile');
+  }
+
+  public getAllUsers(): Observable<any> {
+    return this.request('get', 'user');
   }
 
   public logout(): void {

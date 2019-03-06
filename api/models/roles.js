@@ -8,4 +8,4 @@ var roleModel = new mongoose.Schema({
     }
 });
 
-mongoose.model('Role', roleModel);
+module.exports = mongoose.model('Role', roleModel);

@@ -9,6 +9,10 @@ import { AllUsersComponent } from './components/admin/user/allUsers.component';
 import { AllBooksComponent } from './components/admin/books/allBooks.component';
 import { AllProgramsComponent } from './components/admin/programs/allPrograms.component';
 import { UserboardComponent } from './components/home/userboard/userboard.component';
+import { BooksComponent } from './components/home/books/books.component';
+import { AccountComponent } from './components/home/account/account.component';
+import { UploadComponent } from './components/home/upload/upload.component';
+import { PaymentComponent } from './components/home/payment/payment.component';
 
 import { AuthGuardService } from './services/auth-guard.service';
 
@@ -16,9 +20,13 @@ import { AuthGuardService } from './services/auth-guard.service';
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent, children: [{
-    path: 'userboard', component: UserboardComponent
-  }],  canActivate: [AuthGuardService] },
+  { path: 'home', component: HomeComponent, children: [
+  { path: 'userboard', component: UserboardComponent },
+  { path: 'books', component: BooksComponent }, 
+  { path: 'account', component: AccountComponent },
+  { path: 'upload', component: UploadComponent },
+  { path: 'payment', component: PaymentComponent }],  canActivate: [AuthGuardService] },
+
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children: [{
     path: 'dashboard', component: DashboardComponent  
   },

@@ -27,7 +27,6 @@ module.exports.register = function(req, res) {
   user.email = req.body.email;
   user.program = req.body.program;
 
-
   //user.roles.roleDesc = req.body.roles;
   
   //user.roles.setText('user');

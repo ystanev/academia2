@@ -19,6 +19,9 @@ import { AllBooksComponent } from './components/admin/books/allBooks.component';
 import { AllProgramsComponent } from './components/admin/programs/allPrograms.component';
 import { UserboardComponent } from './components/home/userboard/userboard.component';
 import { UploadComponent } from './components/home/upload/upload.component';
+import { BooksComponent } from './components/home/books/books.component';
+import { AccountComponent } from './components/home/account/account.component';
+import { PaymentComponent } from './components/home/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { UploadComponent } from './components/home/upload/upload.component';
     AllUsersComponent,
     AllBooksComponent,
     AllProgramsComponent,
-    UploadComponent
+    UploadComponent,
+    BooksComponent,
+    AccountComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

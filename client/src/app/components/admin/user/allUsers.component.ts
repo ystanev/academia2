@@ -31,11 +31,11 @@ export class AllUsersComponent implements OnInit {
       
       this.allUsrs = users;
       this.allUsersArr = [];
-      console.log(users);
+      //console.log(users);
       for(this.u of this.allUsrs){
         this.allUsersArr.push(this.allUsrs[this.u]);
       }
-      console.log(this.allUsrs);
+      //console.log(this.allUsrs);
       
     }, (err) => {
       console.error(err);

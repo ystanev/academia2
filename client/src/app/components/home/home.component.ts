@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService, UserDetails } from '../../services/authentication.service';
 
 @Component({
@@ -9,12 +10,12 @@ import { AuthenticationService, UserDetails } from '../../services/authenticatio
 export class HomeComponent implements OnInit {
 
   details: UserDetails;
-  showUserboard:boolean = true;
+  showDashboard:boolean = true;
   showAccount:boolean = false;
   showPayment:boolean = false;
   showUpload:boolean = false;
 
-  constructor(private auth: AuthenticationService) { }
+  constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
     this.auth.profile().subscribe(user => {
@@ -23,11 +24,17 @@ export class HomeComponent implements OnInit {
       console.error(err);
     });
 
+    if (this.auth.isLoggedIn()) {
+      this.router.navigateByUrl('/home/userboard');
+    }else {
+      this.router.navigateByUrl('/login');
+    }
+
   }
 
   toggleUserboard()
   {
-    this.showUserboard = true;
+    this.showDashboard = true;
     this.showAccount = false;
     this.showPayment = false;
     this.showUpload = false;
@@ -35,21 +42,21 @@ export class HomeComponent implements OnInit {
  
   toggleAccount()
   {
-    this.showUserboard = false;
+    this.showDashboard = false;
     this.showAccount = true;
     this.showPayment = false;
     this.showUpload = false;
   }
   togglePayment()
   {
-    this.showUserboard = false;
+    this.showDashboard = false;
     this.showAccount = false;
     this.showPayment = true;
     this.showUpload = false;
   }
   toggleUpload()
   {
-    this.showUserboard = false;
+    this.showDashboard = false;
     this.showAccount = false;
     this.showPayment = false;
     this.showUpload = true;

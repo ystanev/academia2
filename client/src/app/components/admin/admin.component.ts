@@ -26,7 +26,6 @@ export class AdminComponent implements OnInit {
 
     if (this.auth.isLoggedIn()) {
       this.router.navigateByUrl('/admin/dashboard');
-      return true;
     }else {
       this.router.navigateByUrl('/login');
     }

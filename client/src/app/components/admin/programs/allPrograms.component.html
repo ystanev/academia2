@@ -1,15 +1,24 @@
 <table class="table" style="margin-left:-15px;">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{details?.id}}</td>
-            <td>{{details?.name}}</td>
-            <td>{{details?.email}}</td>
-          </tr>
-        </tbody>
-      </table>
+  <thead class="thead-dark">
+    <tr>
+      <th class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">Code</th>
+      <th class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">Name</th>
+      <th class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></th>
+      <th class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="text" [(ngModel)] = "progInfo.programCode" id="programCode" name="programCode" placeholder="program code"></td>
+      <td><input type="text" [(ngModel)] = "progInfo.programName" id="programName" name="programName" placeholder="program name"></td>
+      <td><a style="cursor:pointer;" onmouseover="this.style.color='green'" onmouseout="this.style.color='black'" (click)="addNewProgram()" ><i class="material-icons">add_circle_outline</i></a></td>
+    </tr>
+    <p *ngIf="showAddProgError" style="color:red;">The Program Code and Program Name are required!</p>
+    <tr *ngFor="let items of allProgs; let i = index;">
+      <td>{{items.programCode}}</td>
+      <td>{{items.programName}}</td>
+      <td><a style="cursor:pointer;" onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'"><i class="material-icons">edit</i></a></td>
+      <td><a style="cursor:pointer;" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'" (click)="deleteProgram(this.allProgs[i]._id)"><i class="material-icons">delete</i></a></td>
+    </tr>
+  </tbody>
+</table>

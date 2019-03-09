@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 export interface UserDetails {
@@ -27,6 +27,10 @@ export interface TokenPayload {
   program?: string;
   roles?:string;
 }
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type':'application/json'})
+};
 
 @Injectable({
 	providedIn: 'root'
@@ -69,13 +73,15 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get', type: 'login'|'register'|'profile'|'user', user?: TokenPayload): Observable<any> {
+  private request(method: 'post'|'get'|'delete', type: 'login'|'register'|'profile'|'user'|'programs', user?: TokenPayload): Observable<any> {
     let base;
 
     if (method === 'post') {
       base = this.http.post(`/api/${type}`, user);
-    } else {
+    } else if(method === 'get'){
       base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+    } else if(method === 'delete'){
+      base = this.http.delete(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
 
     const request = base.pipe(
@@ -94,6 +100,10 @@ export class AuthenticationService {
     return this.request('post', 'register', user);
   }
 
+  public program(progInfo): Observable<any> {
+    return this.request('post', 'programs', progInfo);
+  }
+
   public login(user: TokenPayload): Observable<any> {
     return this.request('post', 'login', user);
   }
@@ -104,6 +114,15 @@ export class AuthenticationService {
 
   public getAllUsers(): Observable<any> {
     return this.request('get', 'user');
+  }
+
+  public getAllPrograms(): Observable<any> {
+    return this.request('get', 'programs');
+  }
+
+  public deletePrograms(pID): Observable<any> {
+    const url = `/api/programs/${pID}`;
+    return this.http.delete(url);
   }
 
   public logout(): void {

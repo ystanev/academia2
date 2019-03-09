@@ -1,5 +1,6 @@
 var user = require('../models/users');
 var book = require('../models/books');
+var program = require('../models/programs');
 
 var express = require('express');
 var router = express.Router();
@@ -11,6 +12,7 @@ var auth = jwt({
 
 var ctrlProfile = require('../controllers/profile');
 var ctrlAuth = require('../controllers/authentication');
+var ctrlProgram = require('../controllers/program');
 
 // profile
 router.get('/profile', auth, ctrlProfile.profileRead);
@@ -106,6 +108,30 @@ router.delete('/books/:id', function(req, res, next) {
   });
 });
 
+//create a program
+router.post('/programs', ctrlProgram.add);
+
+//get all programs
+// router.get('/programs', ctrlProgram.getAll);
+router.get('/programs', function(req, res) {
+  program.find({}, function(err, programs) {
+    if(err){
+      res.send('wrong');
+      next();
+    }
+    res.json(programs);
+  });
+});
+
+//delete program
+router.delete('/programs/:id', function(req, res, next) {
+  program.findByIdAndDelete(req.params.id, req.body, function(err, del) {
+    if(err){
+      return next(err);
+    }
+    res.json(del);
+  });
+});
 
 // authentication
 router.post('/register', ctrlAuth.register);

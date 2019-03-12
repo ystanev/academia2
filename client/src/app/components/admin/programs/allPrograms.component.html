@@ -1,21 +1,26 @@
+<h3>Add a New Program</h3>
+<table style="margin-left:-15px;">
+  <tr>
+    <td style="padding:15px;padding-bottom:30px;" class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"><input type="text" style="width:100%;padding:10px;" [(ngModel)] = "progInfo.programName" id="programName" name="programName" placeholder="program name"></td>
+    <td style="padding:15px;padding-bottom:30px;" class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"><a style="cursor:pointer;" onmouseover="this.style.color='green'" onmouseout="this.style.color='black'" (click)="addNewProgram()" ><i class="material-icons">add_circle_outline</i></a></td>
+  </tr>
+  <tr *ngIf="showAddProgError" >
+    <td><p style="color:red;"> Program Name required!</p></td>
+  </tr>
+</table>
+<h3>All Programs</h3>
 <table class="table" style="margin-left:-15px;">
   <thead class="thead-dark">
     <tr>
-      <th class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">Code</th>
-      <th class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">Name</th>
+      <!-- <th class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">Code</th> -->
+      <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">Name</th>
       <th class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></th>
       <th class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td><input type="text" [(ngModel)] = "progInfo.programCode" id="programCode" name="programCode" placeholder="program code"></td>
-      <td><input type="text" [(ngModel)] = "progInfo.programName" id="programName" name="programName" placeholder="program name"></td>
-      <td><a style="cursor:pointer;" onmouseover="this.style.color='green'" onmouseout="this.style.color='black'" (click)="addNewProgram()" ><i class="material-icons">add_circle_outline</i></a></td>
-    </tr>
-    <p *ngIf="showAddProgError" style="color:red;">The Program Code and Program Name are required!</p>
     <tr *ngFor="let items of allProgs; let i = index;">
-      <td>{{items.programCode}}</td>
+      <!-- <td>{{items.programCode}}</td> -->
       <td>{{items.programName}}</td>
       <td><a style="cursor:pointer;" onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'"><i class="material-icons">edit</i></a></td>
       <td><a style="cursor:pointer;" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'" (click)="deleteProgram(this.allProgs[i]._id)"><i class="material-icons">delete</i></a></td>

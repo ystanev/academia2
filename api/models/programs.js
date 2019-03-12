@@ -1,9 +1,9 @@
 var mongoose = require( 'mongoose' );
 
 var programSchema = new mongoose.Schema({
-    programCode: {
-        type: String
-    },
+    // programCode: {
+    //     type: String
+    // },
     programName: {
         type: String
     }

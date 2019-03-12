@@ -73,7 +73,7 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get'|'delete', type: 'login'|'register'|'profile'|'user'|'programs', user?: TokenPayload): Observable<any> {
+  private request(method: 'post'|'get'|'delete', type: 'login'|'register'|'profile'|'user'|'programs'|'books', user?: TokenPayload): Observable<any> {
     let base;
 
     if (method === 'post') {
@@ -123,6 +123,10 @@ export class AuthenticationService {
   public deletePrograms(pID): Observable<any> {
     const url = `/api/programs/${pID}`;
     return this.http.delete(url);
+  }
+
+  public getAllBooks(): Observable<any> {
+    return this.request('get', 'books');
   }
 
   public logout(): void {

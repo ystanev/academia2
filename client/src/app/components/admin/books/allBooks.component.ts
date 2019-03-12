@@ -12,10 +12,20 @@ export class AllBooksComponent implements OnInit {
   details: UserDetails;
   showUser:boolean = true;
   showDashboard:boolean = false;
+  allBooks:any;
   
   constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
+    this.getAllBooks();
+  }
+
+  getAllBooks(){
+    this.auth.getAllBooks().subscribe(books => {
+      this.allBooks = books;
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   toggleDashboard()

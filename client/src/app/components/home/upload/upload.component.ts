@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-upload',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadComponent implements OnInit {
 
-  constructor() { }
+  uploadInfo = {
+    fileName: ''
+  }
+
+  book: any;
+  constructor(private auth: AuthenticationService) { }
 
   ngOnInit() {
   }
 
+  uploadBook(){
+    this.auth.addBook(this.uploadInfo).subscribe(data =>{
+      debugger
+      console.log(data);
+    }, (err) => {
+      console.error(err);
+    });
+  }
 }

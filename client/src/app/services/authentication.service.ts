@@ -69,7 +69,7 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get'|'delete', type: 'login'|'register'|'profile'|'user'|'books', user?: TokenPayload, id?: String): Observable<any> {
+  private request(method: 'post'|'get'|'delete', type: 'login'|'register'|'profile'|'user'|'books'|'upload', user?: TokenPayload, id?: String): Observable<any> {
     let base;
 
     if (method === 'post') {
@@ -109,7 +109,7 @@ export class AuthenticationService {
   }
 
   public addBook(user): Observable<any> {
-    return this.request('post', 'books', user);
+    return this.request('post', 'upload', user);
   }
 
   public getAllBooks(): Observable<any> {

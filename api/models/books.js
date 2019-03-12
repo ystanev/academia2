@@ -16,6 +16,9 @@ var bookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    bookPurchased: [{
+        type: String
+    }],
     course: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Course'

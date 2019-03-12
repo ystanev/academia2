@@ -10,7 +10,6 @@ import { AuthenticationService, UserDetails } from '../../../services/authentica
 export class AllProgramsComponent implements OnInit {
 
   progInfo = {
-    programCode: '',
     programName: ''
   };
 
@@ -19,6 +18,7 @@ export class AllProgramsComponent implements OnInit {
   showDashboard:boolean = false;
   allProgs:any;
   showAddProgError:boolean = false;
+  deleteClicked:boolean = false;
   
   constructor(private auth: AuthenticationService, private router: Router) { }
 
@@ -35,12 +35,15 @@ export class AllProgramsComponent implements OnInit {
 
   }
 
+  showDelModal(){
+    this.deleteClicked = true;
+  }
+
   addNewProgram(){
-    if(this.progInfo.programCode != '' && this.progInfo.programName != '')
+    if(this.progInfo.programName != '')
     {
       this.auth.program(this.progInfo).subscribe(() => {
         this.getAllPrograms();
-        this.progInfo.programCode = '';
         this.progInfo.programName = '';
         this.showAddProgError = false;
       }, (err) => {
@@ -55,7 +58,6 @@ export class AllProgramsComponent implements OnInit {
 
   deleteProgram(progID){
     let id = progID;
-    console.log('progID is ----->'+id);
     this.auth.deletePrograms(id).subscribe(() => {
       this.getAllPrograms();
     }, (err) => {

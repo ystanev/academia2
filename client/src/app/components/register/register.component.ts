@@ -10,6 +10,9 @@ import { AuthenticationService, TokenPayload } from '../../services/authenticati
 })
 export class RegisterComponent implements OnInit {
 
+  allProgs:any;
+  progValSel:any;
+
   credentials: TokenPayload = {
     email: '',
     fname: '',
@@ -35,6 +38,21 @@ export class RegisterComponent implements OnInit {
     }else {
       
     }
+    this.getAllPrograms();
+  }
+
+  getAllPrograms(){
+    this.auth.getAllPrograms().subscribe(programs => {
+      this.allProgs = programs;
+    }, (err) => {
+      console.error(err);
+    });
+
+  }
+
+  getSelectProgValue(progVal){
+    this.progValSel = progVal;
+    console.log('program is ----->'+this.progValSel);
   }
   
   /*
@@ -54,6 +72,7 @@ export class RegisterComponent implements OnInit {
   
   registerUser() {
     this.auth.register(this.credentials).subscribe(() => {
+      console.log(this.credentials);
       this.router.navigateByUrl('/home');
     }, (err) => {
       console.error(err);

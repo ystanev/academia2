@@ -11,11 +11,10 @@
          <input type="text" [(ngModel)] = "credentials.email" id="email" class="fadeIn fourth" name="email" placeholder="email">
          <input type="password" [(ngModel)] = "credentials.password" id="password" class="fadeIn fifth" name="password" placeholder="password">
          <input type="password" id="passagain" class="fadeIn sixth" name="passagain" placeholder="enter password again">
-         <input type="text" [(ngModel)] = "credentials.program" id="program" class="fadeIn seventh" name="program" placeholder="program">
-         <!-- <select>
-            <option>---select---</option>
-            <option *ngFor="let items of allProgs" [(ngModel)] = "credentials.program" id="program" class="fadeIn seventh" name="program" [ngValue]="items">{{items.programName}}</option>
-         </select> -->
+         <!-- <input type="text" [(ngModel)] = "credentials.program" id="program" class="fadeIn seventh" name="program" placeholder="program"> -->
+         <select (change)="onChange($event)" [(ngModel)]="credentials.program" class="form-control col-lg-8">
+            <option *ngFor="let items of allProgs;" [value]="items.programName">{{items.programName}}</option>    
+         </select>
         
          <br>
          <br>

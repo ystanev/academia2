@@ -17,7 +17,8 @@ var userSchema = new mongoose.Schema({
     required: true
   },
   program: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Program',
     required: true
   },
   roles: {

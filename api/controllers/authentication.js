@@ -2,7 +2,7 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 //var Role = mongoose.model('Role');
 var User = mongoose.model('User');
-
+var Program = mongoose.model('Program');
 var sendJSONresponse = function(res, status, content) {
   res.status(status);
   res.json(content);
@@ -21,18 +21,19 @@ module.exports.register = function(req, res) {
 
   var user = new User();
   //var role = new Role();
+  //var program = new Program();
 
   user.fname = req.body.fname;
   user.lname = req.body.lname;
   user.email = req.body.email;
-  user.program = req.body.program;
+  //program = req.body.program;
 
   //user.roles.roleDesc = req.body.roles;
   
   //user.roles.setText('user');
   //user.roles.push('user');
   //user.roles = role._id;
-  
+  //user.program.push(Program);
   user.setPassword(req.body.password);
 
   user.save(function(err) {

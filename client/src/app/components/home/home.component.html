@@ -69,7 +69,7 @@
       <div class="list-group list-group-flush">
         <a class="list-group-item list-group-item-action bg-light" [routerLink]="['userboard']" (click)="toggleUserboard()"><i class="material-icons">book</i> Dashboard</a>
         
-        <a class="list-group-item list-group-item-action bg-light" [routerLink]="['account']" (click)="toggleAccount()"><i class="material-icons">settings</i> Account</a>
+        <a class="list-group-item list-group-item-action bg-light" [routerLink]="['account/:id']" (click)="toggleAccount()"><i class="material-icons">settings</i> Account</a>
         <a class="list-group-item list-group-item-action bg-light" [routerLink]="['payment']" (click)="togglePayment()"><i class="material-icons">attach_money</i> Payment</a>
         <a class="list-group-item list-group-item-action bg-light" [routerLink]="['upload']" (click)="toggleUpload()"><i class="material-icons">cloud_upload</i> Upload</a>
         <!-- <a class="list-group-item list-group-item-action bg-light" *ngIf="auth.isLoggedIn()" (click)="auth.logout()"><i class="material-icons">power_settings_new</i> Logout</a> -->
@@ -84,7 +84,7 @@
       Dashboard!
     </div> -->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-      <router-outlet *ngIf="showUserboard||showAccount||showPayment||showUpload"></router-outlet>
+      <router-outlet *ngIf="showDashboard||showAccount||showPayment||showUpload"></router-outlet>
     </div>
     <!-- /#page-content-wrapper -->
 

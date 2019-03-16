@@ -12,6 +12,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var multer = require('multer');
+
 // [SH] Require Passport
 var passport = require('passport');
 
@@ -82,6 +84,8 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+
 
 //app.listen(3000, () => console.log('Server running on port 3000!'))
 module.exports = app;

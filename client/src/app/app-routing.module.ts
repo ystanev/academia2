@@ -22,8 +22,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, children: [
   { path: 'userboard', component: UserboardComponent },
-  { path: 'books', component: BooksComponent }, 
-  { path: 'account', component: AccountComponent },
+  { path: 'books/:id', component: BooksComponent }, 
+  { path: 'account/:id', component: AccountComponent },
   { path: 'upload', component: UploadComponent },
   { path: 'payment', component: PaymentComponent }],  canActivate: [AuthGuardService] },
 

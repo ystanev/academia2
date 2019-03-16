@@ -50,9 +50,14 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  getSelectProgValue(progVal){
-    this.progValSel = progVal;
-    console.log('program is ----->'+this.progValSel);
+  // getSelectProgValue(progVal){
+  //   this.progValSel = progVal;
+  //   console.log('program is ----->'+this.progValSel);
+  // }
+
+  onChange(event){
+    this.credentials.program =  event.target.value;
+    console.log(this.credentials);
   }
   
   /*

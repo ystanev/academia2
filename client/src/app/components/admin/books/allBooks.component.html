@@ -1,26 +1,19 @@
+<h3>All Books</h3>
 <table class="table" style="margin-left:-15px;">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Author</th>
-            <th scope="col">ISBN #</th>
-            <th scope="col">Course ID</th>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">Name</th>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">Author</th>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">ISBN #</th>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">Course ID</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let items of allBooks">
-            <td>#</td>
-            <td>{{items?.bookName}}</td>
-            <td>{{items?.bookAuthor}}</td>
-            <td>{{items?.bookIsbn}}</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>{{details?.id}}</td>
-            <td>{{details?.name}}</td>
-            <td>{{details?.email}}</td>
-            <td>@mdo</td>
+          <tr *ngFor="let items of allBooks; let i = index;">
+            <td>{{items.bookName}}</td>
+            <td>{{items.bookAuthor}}</td>
+            <td>{{items.bookIsbn}}</td>
+            <td></td>
           </tr>
         </tbody>
       </table>

@@ -28,6 +28,10 @@ export interface TokenPayload {
   roles?:string;
 }
 
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type':'application/json'})
+};
+
 @Injectable({
 	providedIn: 'root'
 })
@@ -70,10 +74,12 @@ export class AuthenticationService {
   }
 
   private request(method: 'post'|'get'|'delete', type: 'login'|'register'|'profile'|'user'|'books'|'upload', user?: TokenPayload, id?: String): Observable<any> {
+
     let base;
 
     if (method === 'post') {
       base = this.http.post(`/api/${type}`, user);
+
     } else if (method === 'get'){
       base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     } else if (method === 'delete'){
@@ -96,6 +102,10 @@ export class AuthenticationService {
     return this.request('post', 'register', user);
   }
 
+  public program(progInfo): Observable<any> {
+    return this.request('post', 'programs', progInfo);
+  }
+
   public login(user: TokenPayload): Observable<any> {
     return this.request('post', 'login', user);
   }
@@ -107,7 +117,7 @@ export class AuthenticationService {
   public getAllUsers(): Observable<any> {
     return this.request('get', 'user');
   }
-
+  
   public addBook(book, filePath): Observable<any> {
     //return this.request('post', 'upload', book);
     return this.http.post('/api/books', filePath + book).pipe(catchError(this.handleError));
@@ -120,8 +130,17 @@ export class AuthenticationService {
      { headers: { 'enctype': 'multipart/form-data' }}).pipe(catchError(this.handleError));
   }
 
+  public getAllPrograms(): Observable<any> {
+    return this.request('get', 'programs');
+  }
+
+  public deletePrograms(pID): Observable<any> {
+    const url = `/api/programs/${pID}`;
+    return this.http.delete(url);
+  }
+
   public getAllBooks(): Observable<any> {
-    return this.request('get','books');
+    return this.request('get', 'books');
   }
 
   public logout(): void {

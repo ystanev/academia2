@@ -9,26 +9,20 @@ import { AuthenticationService, UserDetails } from '../../../services/authentica
 })
 export class AllBooksComponent implements OnInit {
 
-  allBooks: any;
-  allBooksArr: any;
-  u: any;
   details: UserDetails;
   showUser:boolean = true;
   showDashboard:boolean = false;
+  allBooks:any;
   
   constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
+    this.getAllBooks();
+  }
+
+  getAllBooks(){
     this.auth.getAllBooks().subscribe(books => {
-      
       this.allBooks = books;
-      this.allBooksArr = [];
-      console.log(books);
-      for(this.u of this.allBooks){
-        this.allBooksArr.push(this.allBooks[this.u]);
-      }
-      //console.log(this.allBooks);
-      
     }, (err) => {
       console.error(err);
     });

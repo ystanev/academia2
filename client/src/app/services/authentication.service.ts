@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -73,7 +73,7 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get'|'delete', type: 'login'|'register'|'profile'|'user'|'books'|'upload', user?: TokenPayload, id?: String): Observable<any> {
+  private request(method: 'post'|'get'|'delete', type: 'login'|'register'|'profile'|'user'|'books'|'upload'|'programs', user?: TokenPayload, id?: String): Observable<any> {
 
     let base;
 
@@ -118,9 +118,9 @@ export class AuthenticationService {
     return this.request('get', 'user');
   }
   
-  public addBook(book, filePath): Observable<any> {
+  public addBook(book): Observable<any> {
     //return this.request('post', 'upload', book);
-    return this.http.post('/api/books', filePath + book).pipe(catchError(this.handleError));
+    return this.http.post('/api/books', book).pipe(catchError(this.handleError));
   }
 
   public uploadFile(fileToUpload: File): Observable<any> {

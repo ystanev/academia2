@@ -40,7 +40,7 @@ export class UploadComponent implements OnInit {
     var path = "/api/public/upload/";
     this.bookPath = path+fileName;
 
-    this.auth.addBook(form, this.bookPath).subscribe(data => {
+    this.auth.addBook(form).subscribe(data => {
       //data.bookPath = this.bookPath;
       //var fileName = this.fileToUpload.name;
       //var path = "/api/public/upload/";

@@ -1,18 +1,44 @@
 <div class="container">
     <h1>File Upload</h1>
     
-    <form enctype="multipart/form-data">
+    <form [formGroup]="bookForm" (ngSubmit)="onFormSubmit(bookForm.value)">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="ISBN" formControlName="bookIsbn"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!bookForm.get('bookIsbn').valid && bookForm.get('bookIsbn').touched">Please enter ISBN</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Title" formControlName="bookName"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!bookForm.get('bookName').valid && bookForm.get('bookName').touched">Please enter Book Title</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Author" formControlName="bookAuthor"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!bookForm.get('bookAuthor').valid && bookForm.get('bookAuthor').touched">Please enter Book Author</span>
+        </mat-error>
+      </mat-form-field>
       <div class="file-field input-field">
-        <div class="btn grey">
+        <div class="form-group btn grey">
           <span>File</span>
-          <input [(ngModel)]="uploadInfo.fileName" id="fileName" name="fileName" type="file">
+          <input  id="fileName" name="fileName" type="file"
+          (change)="handleFileInput($event.target.files)">
         </div>
-        <div class="file-path-wrapper">
-          <input class="file-path validate" type="text">
-        </div>
+        <mat-form-field class="example-full-width">
+          <input matInput class="file-path validate" type="text" formControlName="bookPath">
+          <mat-error>
+            <span *ngIf="!bookForm.get('bookPath').valid || bookForm.get('bookPath').touched"></span>
+          </mat-error>
+        </mat-form-field>
       </div>
-      <button type="submit" class="btn" (click)="uploadBook()">Submit</button>
+      <div class="button-row">
+        <button type="submit" [disabled]="!bookForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+      </div>
+      <!-- <button type="submit" class="btn" (click)="uploadBook()">Submit</button>-->
     </form>
-    <br>
-    <img src="" class="responsive-img">
 </div>

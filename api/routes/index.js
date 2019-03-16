@@ -1,6 +1,7 @@
 var user = require('../models/users');
 var book = require('../models/books');
 var multer = require('multer');
+const path = require('path');
 
 var express = require('express');
 var router = express.Router();
@@ -114,7 +115,7 @@ const storage = multer.diskStorage({
   filename: function(req, file, cb) {
     cb(
       null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+      /*file.fieldname + "-" + Date.now() + path.extname(file.originalname)*/ file.originalname
     );
   }
 });
@@ -146,8 +147,12 @@ function checkFileType(file, cb) {
   }
 }
 
-router.get("/upload", (req, res) => res.render("index"));
+//router.get("/upload", (req, res) => res.render("index"));
   
+router.get("/upload", function(req, res){
+  res.sendFile(__dirname + "index");
+});
+
 router.post("/upload", (req, res) => {
   upload(req, res, err => {
     if (err) {
@@ -168,6 +173,8 @@ router.post("/upload", (req, res) => {
     }
   });
 });
+
+router.use(express.static("./public"));
 //==========================================================
 
 // authentication

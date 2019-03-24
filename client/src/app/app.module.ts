@@ -21,6 +21,7 @@ import { UserboardComponent } from './components/home/userboard/userboard.compon
 import { UploadComponent } from './components/home/upload/upload.component';
 import { BooksComponent } from './components/home/books/books.component';
 import { AccountComponent } from './components/home/account/account.component';
+import { FilterPipe } from './pipes/filter.pipe';
 import { PaymentComponent } from './components/home/payment/payment.component';
 
 @NgModule({
@@ -38,7 +39,8 @@ import { PaymentComponent } from './components/home/payment/payment.component';
     UploadComponent,
     BooksComponent,
     AccountComponent,
-    PaymentComponent
+    PaymentComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

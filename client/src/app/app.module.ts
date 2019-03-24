@@ -23,6 +23,7 @@ import { BooksComponent } from './components/home/books/books.component';
 import { AccountComponent } from './components/home/account/account.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { PaymentComponent } from './components/home/payment/payment.component';
+import { BookDetailsComponent } from './components/home/book-details/book-details.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { PaymentComponent } from './components/home/payment/payment.component';
     BooksComponent,
     AccountComponent,
     PaymentComponent,
-    FilterPipe
+    FilterPipe,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,

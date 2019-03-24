@@ -1,38 +1,82 @@
+<style>
+  .row > .col-xs-3 {
+      flex: 0 0 25%;
+      max-width: 25%
+  }
+
+  .flex-nowrap {
+      -webkit-flex-wrap: nowrap!important;
+      -ms-flex-wrap: nowrap!important;
+      flex-wrap: nowrap!important;
+  }
+  .flex-row {
+      display:flex;
+      -webkit-box-orient: horizontal!important;
+      -webkit-box-direction: normal!important;
+      -webkit-flex-direction: row!important;
+      -ms-flex-direction: row!important;
+      flex-direction: row!important;
+  }
+
+
+  .well {
+      min-height: 300px;
+      width: 100%;
+  }
+</style>
+
+<!-- Search form -->
 <div>
+  <input class="form-control col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10" [(ngModel)]="searchText" (focus)="searchForBooksFocusIn()" (focusout)="searchForBooksFocusOut()" style="margin-top:10px;margin-bottom: 10px;padding:25px;font-size: 20px;border-radius: 15px;" type="search" placeholder="Search" aria-label="Search" />
+    <ul *ngIf="searchBoxClicked">
+      <li *ngFor="let items of allBooks | filter: searchText">{{items.bookName}}</li>
+    </ul>
+</div>
+
+<!-- BOOK CARDS -->
+<div class="container-fluid" style="overflow-x: scroll;">
+  <h2>Subscribed</h2>
+  <div class="row flex-row flex-nowrap">
+    <mat-card class="col-xs-3 example-card margin-1" style="background-color: lightblue;"  *ngFor="let items of allBooks">
+      <mat-card-header style="text-align: center;">
+        <mat-card-title>{{items?.bookName}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content style="text-align: center;">
+        <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp; {{items?.bookAuthor}}</p>
+        <p><i class="glyphicon glyphicon-barcode light-red lighter bigger-120"></i>&nbsp; {{items?.bookIsbn}}</p>
+      </mat-card-content>
+      <mat-card-actions style="text-align: center;">
+        <button mat-button (click)="openBook()">OPEN</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+ 
+<div *ngIf="showPop">
+  <p>test</p>
+</div>
+
+<!-- <div>
   <div id="purchased">
-    <b>Subscribed....</b>
     <div class="container" style="margin-left: 0px; padding-left: 0px;">
-      <mat-card class="col-xs-3 example-card margin-1"  *ngFor="let items of allBooks">
-        <mat-card-header>
+      <h2 style="margin-left:15px;margin-top: 10px;margin-bottom: 5px;">Subscribed</h2>
+      <mat-card class="col-xs-3 example-card margin-1" style="height:300px; width:300px;"  *ngFor="let items of allBooks">
+        <mat-card-header style="text-align: center;">
           <mat-card-title>{{items?.bookName}}</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="..." alt="Photo of a Shiba Inu">
-        <mat-card-content>
-          <p>
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
-          </p>
+        <mat-card-content style="text-align: center;">
+            <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp; {{items?.bookAuthor}}</p>
+            <p><i class="glyphicon glyphicon-barcode light-red lighter bigger-120"></i>&nbsp; {{items?.bookIsbn}}</p>
         </mat-card-content>
-        <mat-card-actions>
+        <mat-card-actions style="text-align: center;">
           <button mat-button>OPEN</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
+           <button mat-button>SHARE</button> -->
+       <!-- </mat-card-actions>
       </mat-card>
     </div>  
     <br/>
     <br/>
-
-  <div id="available">
-    Books available to Purchased....
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
   </div>
-</div>
+</div> -->
+
+

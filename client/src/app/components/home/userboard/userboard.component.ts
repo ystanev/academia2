@@ -12,6 +12,8 @@ export class UserboardComponent implements OnInit {
   allBooks: any;
   allBooksArr: any;
   u: any;
+  showPop:boolean = false;
+  searchBoxClicked:boolean = false;
   
   constructor(private auth: AuthenticationService) { }
 
@@ -31,4 +33,18 @@ export class UserboardComponent implements OnInit {
     });
   }
 
+  searchForBooksFocusIn()
+  {
+      this.searchBoxClicked = true;
+  }
+
+  searchForBooksFocusOut()
+  {
+      this.searchBoxClicked = false;
+  }
+
+  openBook()
+  {
+    this.showPop = true;
+  }
 }

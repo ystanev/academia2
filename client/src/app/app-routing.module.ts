@@ -13,6 +13,8 @@ import { BooksComponent } from './components/home/books/books.component';
 import { AccountComponent } from './components/home/account/account.component';
 import { UploadComponent } from './components/home/upload/upload.component';
 import { PaymentComponent } from './components/home/payment/payment.component';
+import { BookDetailsComponent } from './components/home/book-details/book-details.component';
+
 
 import { AuthGuardService } from './services/auth-guard.service';
 
@@ -21,11 +23,13 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, children: [
-  { path: 'userboard', component: UserboardComponent },
-  { path: 'books/:id', component: BooksComponent }, 
-  { path: 'account/:id', component: AccountComponent },
-  { path: 'upload', component: UploadComponent },
-  { path: 'payment', component: PaymentComponent }],  canActivate: [AuthGuardService] },
+    { path: 'userboard', component: UserboardComponent },
+    { path: 'books/:id', component: BooksComponent }, 
+    { path: 'account/:id', component: AccountComponent },
+    { path: 'upload', component: UploadComponent },
+    { path: 'payment', component: PaymentComponent },
+    { path: 'bookDetails/:id', component: BookDetailsComponent}
+  ],  canActivate: [AuthGuardService] },
 
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children: [{
     path: 'dashboard', component: DashboardComponent  

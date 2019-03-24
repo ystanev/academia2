@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, UserDetails } from '../../../services/authentication.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class UserboardComponent implements OnInit {
   showPop:boolean = false;
   searchBoxClicked:boolean = false;
   
-  constructor(private auth: AuthenticationService) { }
+  constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
     this.auth.getAllBooks().subscribe(books => {
@@ -44,8 +45,9 @@ export class UserboardComponent implements OnInit {
       this.searchBoxClicked = false;
   }
 
-  openBook()
+  openBook(id)
   {
-    this.showPop = true;
+    console.log(id);
+    this.router.navigate(['/home/bookDetails',id]);
   }
 }

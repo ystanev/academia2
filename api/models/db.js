@@ -49,4 +49,4 @@ process.on('SIGTERM', function() {
 require('./users');
 require('./books');
 require('./programs');
-require('./userBook');
+require('./subscription');

@@ -132,6 +132,10 @@ export class AuthenticationService {
     return this.http.post('/api/books', book).pipe(catchError(this.handleError));
   }
 
+  public addSubscription(subscription): Observable<any> {
+    return this.http.post('/api/subscription', subscription).pipe(catchError(this.handleError));
+  }
+
   public getBook(bID): Observable<any> {
     const url = `/api/books/${bID}`;
     return this.http.get(url);

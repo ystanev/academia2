@@ -23,6 +23,13 @@
           <span *ngIf="!bookForm.get('bookAuthor').valid && bookForm.get('bookAuthor').touched">Please enter Book Author</span>
         </mat-error>
       </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Price" formControlName="bookPrice"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!bookForm.get('bookPrice').valid && bookForm.get('bookPrice').touched">Please enter a Book Price</span>
+        </mat-error>
+      </mat-form-field>
       <div class="file-field input-field">
         <div class="form-group btn grey">
           <input  id="fileName" name="fileName" type="file"

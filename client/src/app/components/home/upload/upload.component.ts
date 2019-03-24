@@ -17,6 +17,7 @@ export class UploadComponent implements OnInit {
   bookName:string='';
   bookAuthor:string='';
   bookPath:string = '';
+  bookPrice:string = '';
   //program:string = '';
 
   fileToUpload: File = null;
@@ -28,7 +29,8 @@ export class UploadComponent implements OnInit {
       'bookIsbn' : [null, Validators.required],
       'bookName' : [null, Validators.required],
       'bookAuthor' : [null, Validators.required],
-      'bookPath' : [null, Validators.required]
+      'bookPath' : [null, Validators.required],
+      'bookPrice' : [null, Validators.required]
     });
   }
 

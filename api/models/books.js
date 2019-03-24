@@ -16,6 +16,10 @@ var bookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    bookPrice: {
+        type: Number,
+        requires: true  
+    },
     program: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Program'

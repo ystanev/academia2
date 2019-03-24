@@ -9,6 +9,7 @@ import { AuthenticationService, UserDetails } from '../../../services/authentica
 })
 export class UserboardComponent implements OnInit {
 
+  details: UserDetails;
   allBooks: any;
   allBooksArr: any;
   u: any;

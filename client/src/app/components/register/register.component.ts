@@ -10,17 +10,18 @@ import { AuthenticationService, TokenPayload } from '../../services/authenticati
 })
 export class RegisterComponent implements OnInit {
 
-  allProgs:any;
-  progValSel:any;
-
   credentials: TokenPayload = {
     email: '',
     fname: '',
     lname: '',  
     password: '',
     program: '',
-    roles: 'normalUser'
+    //roles: 'normalUser'
   };
+  
+  allProgs:any;
+  progValSel:any;
+
   /*
   public user: User;
 
@@ -32,12 +33,12 @@ export class RegisterComponent implements OnInit {
   constructor(private auth: AuthenticationService, private router: Router) {}
   
   ngOnInit() {
-    if (this.auth.isLoggedIn()) {
+    /*if (this.auth.isLoggedIn()) {
       this.router.navigateByUrl('/home');
       return false;
     }else {
       
-    }
+    }*/
     this.getAllPrograms();
   }
 
@@ -76,6 +77,7 @@ export class RegisterComponent implements OnInit {
   */
   
   registerUser() {
+    //debugger
     this.auth.register(this.credentials).subscribe(() => {
       console.log(this.credentials);
       this.router.navigateByUrl('/home');

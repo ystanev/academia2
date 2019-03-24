@@ -1,3 +1,76 @@
-<p>
-  account works!
-</p>
+<div>
+  <mat-tab-group mat-align-tabs="start">
+    <mat-tab label="User">
+        <form [formGroup]="userForm" (ngSubmit)="onFormSubmit(userForm.value)">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="First Name" formControlName="fName"
+                     [errorStateMatcher]="matcher">
+              <mat-error>
+                <span *ngIf="!userForm.get('fName').valid && userForm.get('fName').touched">Please enter ISBN</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Last Name" formControlName="lName"
+                     [errorStateMatcher]="matcher">
+              <mat-error>
+                <span *ngIf="!userForm.get('lName').valid && userForm.get('lName').touched">Please enter Book Title</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="email" formControlName="email"
+                     [errorStateMatcher]="matcher">
+              <mat-error>
+                <span *ngIf="!userForm.get('email').valid && userForm.get('email').touched">Please enter Book Author</span>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="password" formControlName="password"
+                     [errorStateMatcher]="matcher"></textarea>
+              <mat-error>
+                <span *ngIf="!userForm.get('password').valid && userForm.get('password').touched">Please enter Book Description</span>
+              </mat-error>
+            </mat-form-field>
+            <!--<mat-form-field class="example-full-width">
+              <input matInput placeholder="newPassword" formControlName="newPassword"
+                     [errorStateMatcher]="matcher">
+              <mat-error>
+                <span *ngIf="!userForm.get('newPassword').valid && userForm.get('newPassword').touched">Please enter Publisher</span>
+              </mat-error>
+            </mat-form-field>-->
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="program" formControlName="program"
+                     [errorStateMatcher]="matcher">
+              <mat-error>
+                <span *ngIf="!userForm.get('program').valid && userForm.get('program').touched">Please enter Published Year</span>
+              </mat-error>
+            </mat-form-field>
+            <div class="button-row">
+              <button type="submit" [disabled]="!userForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+            </div>
+          </form>
+    </mat-tab>
+
+    <mat-tab label="Books">
+      <h3>All Books</h3>
+      <table class="table" style="margin-left:-15px;">
+        <thead class="thead-dark">
+          <tr>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">Name</th>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">Author</th>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">ISBN #</th>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">Course ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let items of allBooks; let i = index;">
+            <td>{{items.bookName}}</td>
+            <td>{{items.bookAuthor}}</td>
+            <td>{{items.bookIsbn}}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+    <mat-tab label="Settings">Content 3</mat-tab>
+  </mat-tab-group>
+</div>

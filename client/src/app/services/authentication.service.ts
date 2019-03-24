@@ -10,7 +10,7 @@ export interface UserDetails {
   fname: string;
   lname: string;
   program: string;
-  roles: string;
+  //roles: string;
   exp: number;
   iat: number;
 }
@@ -25,7 +25,7 @@ export interface TokenPayload {
   fname?: string;
   lname?: string;
   program?: string;
-  roles?:string;
+  //roles?:string;
 }
 
 const httpOptions = {
@@ -73,7 +73,7 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get'|'delete', type: 'login'|'register'|'profile'|'user'|'books'|'upload'|'programs', user?: TokenPayload, id?: String): Observable<any> {
+  private request(method: 'post'|'get'|'delete', type: 'login'|'register'|'profile'|'user'|'books'|'upload'|'programs', user?: TokenPayload): Observable<any> {
 
     let base;
 
@@ -82,8 +82,6 @@ export class AuthenticationService {
 
     } else if (method === 'get'){
       base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
-    } else if (method === 'delete'){
-      base = this.http.delete(`/api/${type}/${id}`);
     }
 
     const request = base.pipe(
@@ -91,6 +89,7 @@ export class AuthenticationService {
         if (data.token) {
           this.saveToken(data.token);
         }
+        //console.log(data);
         return data;
       })
     );
@@ -114,13 +113,33 @@ export class AuthenticationService {
     return this.request('get', 'profile');
   }
 
+  public getAUser(uID): Observable<any> {
+    const url = `/api/user/${uID}`;
+    return this.http.get(url);
+  }
+
   public getAllUsers(): Observable<any> {
     return this.request('get', 'user');
+  }
+
+  public updateUser(uID, user): Observable<any> {
+    const url = `/api/user/${uID}`;
+    return this.http.put(url, user);
   }
   
   public addBook(book): Observable<any> {
     //return this.request('post', 'upload', book);
     return this.http.post('/api/books', book).pipe(catchError(this.handleError));
+  }
+
+  public getBook(bID): Observable<any> {
+    const url = `/api/books/${bID}`;
+    return this.http.get(url);
+  }
+
+  public updateABook(bID, book): Observable<any> {
+    const url = `/api/books/${bID}`;
+    return this.http.put(url, book);
   }
 
   public uploadFile(fileToUpload: File): Observable<any> {

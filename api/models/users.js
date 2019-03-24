@@ -16,15 +16,19 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  /*program: {
+    type: String,
+    required: true
+  }*/
   program: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Program',
     required: true
   },
-  roles: {
+  /*roles: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Role'
-  },
+  },*/
   hash: String,
   salt: String
 }, {timestamps: true});
@@ -49,7 +53,7 @@ userSchema.methods.generateJwt = function() {
     fname: this.fname,
     lname: this.lname,
     program: this.program,
-    roles: this.roles,
+    //roles: this.roles,
     exp: parseInt(expiry.getTime() / 1000),
   }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };

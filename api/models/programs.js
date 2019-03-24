@@ -5,7 +5,8 @@ var programSchema = new mongoose.Schema({
     //     type: String
     // },
     programName: {
-        type: String
+        type: String,
+        required: true
     },
     users: [{
         type: mongoose.Schema.Types.ObjectId,

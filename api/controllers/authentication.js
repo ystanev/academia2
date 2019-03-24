@@ -2,7 +2,7 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 //var Role = mongoose.model('Role');
 var User = mongoose.model('User');
-var Program = mongoose.model('Program');
+var program = require('../models/programs');
 var sendJSONresponse = function(res, status, content) {
   res.status(status);
   res.json(content);
@@ -20,29 +20,37 @@ module.exports.register = function(req, res) {
   //let errors = [];
 
   var user = new User();
-  //var role = new Role();
-  //var program = new Program();
 
   user.fname = req.body.fname;
   user.lname = req.body.lname;
   user.email = req.body.email;
-  //program = req.body.program;
+  user.program = req.body.program;
 
-  //user.roles.roleDesc = req.body.roles;
-  
-  //user.roles.setText('user');
-  //user.roles.push('user');
-  //user.roles = role._id;
-  //user.program.push(Program);
   user.setPassword(req.body.password);
 
   user.save(function(err) {
-    var token;
-    token = user.generateJwt();
-    res.status(200);
-    res.json({
-      "token" : token
+    if(err){
+      console.log(err);
+    }else {
+      var token;
+      token = user.generateJwt();
+      res.status(200);
+      res.json({
+        "token" : token
+      });
+    }
+    
+    program.findOneAndUpdate({_id: user.program}, req.body, function(err, update) {
+      if(err){
+        console.log(err);
+      }else {
+        //console.log(update);
+        update.users.push(user);
+        update.save();
+        //res.json(update);
+      }
     });
+
   });
 
 };

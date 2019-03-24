@@ -37,7 +37,7 @@ router.get('/user/:id', function(req, res, next) {
       return next(err);
     }
     res.json(post);
-  });
+  }).populate('program').exec();
 });
 
 //update a user
@@ -183,14 +183,25 @@ router.post('/programs', ctrlProgram.add);
 
 //get all programs
 // router.get('/programs', ctrlProgram.getAll);
-router.get('/programs', function(req, res) {
+router.get('/programs', function(req, res, next) {
   program.find({}, function(err, programs) {
     if(err){
       res.send('wrong');
-      next();
+      console.log(err);
+      return next(err);
     }
     res.json(programs);
-  });
+  }).populate('users').exec();
+});
+
+//get a program
+router.get('/programs/:id', function(req, res, next) {
+  program.findById(req.params.id, function(err, program) {
+    if(err){
+      return next(err);
+    }
+    res.json(program);
+  }).populate('users').exec();
 });
 
 //delete program
@@ -203,8 +214,38 @@ router.delete('/programs/:id', function(req, res, next) {
   });
 });
 
+//update program
+router.put('/programs/:id', function(req, res, next) {
+  program.users.push(user);
+  program.findOneAndUpdate(req.params.id, req.body, function(err, update) {
+    if(err){
+      return next(err);
+    }
+    res.json(update);
+  }).populate('users').exec();
+});
+
 // authentication
 router.post('/register', ctrlAuth.register);
+/*router.post('/register', function(req, res) {
+  user.create(req.body, function(err, newUsers) {
+    if(err){
+      console.log(err);
+    }else {
+      program.findOneAndUpdate({users: newUsers._id}, function(err, found) {
+        if(err){
+          console.log(err);
+        }else {
+          found.users.push(newUsers);
+          found.save();
+
+          res.json(found);
+        }
+      });
+    }
+  });
+});*/
+
 router.post('/login', ctrlAuth.login);
 
 module.exports = router;

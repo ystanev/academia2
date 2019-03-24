@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-books',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BooksComponent implements OnInit {
 
-  constructor() { }
+  book = {};
+
+  constructor(private route: ActivatedRoute, private router: Router, private auth: AuthenticationService) { }
 
   ngOnInit() {
+    this.getBookDetailes(this.route.snapshot.params['id']);
   }
+
+  getBookDetailes(id){
+    this.auth.getBook(id).subscribe(data => {
+      console.log(data);
+      this.book = data;
+    });
+  }
+
+
 
 }

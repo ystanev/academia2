@@ -44,7 +44,7 @@ export class AccountComponent implements OnInit {
         fName: user.fname,
         lName: user.lname,
         email: user.email,
-        password: user.password,
+        password: user.email,
         program: user.program.programName
       });
     });

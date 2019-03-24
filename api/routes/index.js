@@ -3,6 +3,7 @@ var book = require('../models/books');
 var multer = require('multer');
 const path = require('path');
 var program = require('../models/programs');
+var subscription = require('../models/subscription');
 
 var express = require('express');
 var router = express.Router();
@@ -247,5 +248,46 @@ router.post('/register', ctrlAuth.register);
 });*/
 
 router.post('/login', ctrlAuth.login);
+
+router.post('/subscription',function(req,res){
+  userId = req.body.userId;
+  bookId = req.body.bookId;
+
+
+  subscription.findOne({"userRef": userId},function(err,post){
+    if(err){
+      console.log(err);
+    }else{
+      if(post == null || post == undefined){
+        subscription.create({"userRef": userId, "bookRef":[bookId]},function(err,post){
+          if(err){
+            console.log(err);
+          }else{
+            res.json(post);
+          }
+        });
+      }else{
+        bookExist = false;
+        for(i=0; i < post.bookRef.length;i++){
+          console.log(post.bookRef[i]);
+          if(post.bookRef[i] == bookId){
+            bookExist = true;
+            break;
+          }
+        }
+        if(bookExist){
+          res.json({"alreadyExists": true});
+        }else{
+          post.bookRef.push(bookId);
+          post.save();
+          res.json(post);
+        }     
+        
+      }
+    }
+  });
+
+
+});
 
 module.exports = router;

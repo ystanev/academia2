@@ -12,6 +12,7 @@ export class UserboardComponent implements OnInit {
 
   details: UserDetails;
   allBooks: any;
+  allBooksProg: any;
   allBooksArr: any;
   u: any;
   showPop:boolean = false;
@@ -20,18 +21,11 @@ export class UserboardComponent implements OnInit {
   constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
-    this.auth.getAllBooks().subscribe(books => {
-      
-      this.allBooks = books;
-      this.allBooksArr = [];
-      console.log(books);
-      for(this.u of this.allBooks){
-        this.allBooksArr.push(this.allBooks[this.u]);
-      }
-      //console.log(this.allBooks);
-      
-    }, (err) => {
-      console.error(err);
+    this.auth.profile().subscribe(user => {
+      this.auth.getAllBooks().subscribe(books => {
+        this.details = user;
+        this.allBooksProg = books;
+      });
     });
   }
 

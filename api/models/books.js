@@ -20,6 +20,10 @@ var bookSchema = new mongoose.Schema({
         type: Number,
         requires: true  
     },
+    uploadedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     program: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Program'

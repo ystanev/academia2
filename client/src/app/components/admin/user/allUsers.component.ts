@@ -23,6 +23,7 @@ export class AllUsersComponent implements OnInit {
   ngOnInit() {
     this.auth.getAllUsers().subscribe(users => {
       this.allUsrs = users;
+      //console.log(users[0].program.programName);
       this.allUsersArr = [];
       for(this.u of this.allUsrs){
         this.allUsersArr.push(this.allUsrs[this.u]);

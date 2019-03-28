@@ -14,6 +14,7 @@ import { AccountComponent } from './components/home/account/account.component';
 import { UploadComponent } from './components/home/upload/upload.component';
 import { PaymentComponent } from './components/home/payment/payment.component';
 import { BookDetailsComponent } from './components/home/book-details/book-details.component';
+import { BookViewComponent } from './components/home/book-view/book-view.component';
 
 
 import { AuthGuardService } from './services/auth-guard.service';
@@ -28,7 +29,8 @@ const routes: Routes = [
     { path: 'account/:id', component: AccountComponent },
     { path: 'upload', component: UploadComponent },
     { path: 'payment', component: PaymentComponent },
-    { path: 'bookDetails/:id', component: BookDetailsComponent}
+    { path: 'bookDetails/:id', component: BookDetailsComponent},
+    { path: 'book-view/:id', component: BookViewComponent}
   ],  canActivate: [AuthGuardService] },
 
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children: [{
@@ -38,8 +40,7 @@ const routes: Routes = [
  {path: 'books', component: AllBooksComponent},
  {path: 'programs', component: AllProgramsComponent}
 ] },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login', pathMatch: 'full' }
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -21,14 +21,14 @@ var ctrlProgram = require('../controllers/program');
 router.get('/profile', auth, ctrlProfile.profileRead);
 
 //get all users
-router.get('/user', function(req, res) {
+router.get('/user', function(req, res, next) {
   user.find({}, function(err, users) {
     if(err){
-      res.send('wrong');
-      next();
+     // res.send('wrong');
+      return next(err);
     }
     res.json(users);
-  });
+  }).populate('program').exec();;
 });
 
 //get a user
@@ -223,32 +223,10 @@ router.put('/programs/:id', function(req, res, next) {
       return next(err);
     }
     res.json(update);
-  }).populate('users').exec();
+  });
 });
 
-// authentication
-router.post('/register', ctrlAuth.register);
-/*router.post('/register', function(req, res) {
-  user.create(req.body, function(err, newUsers) {
-    if(err){
-      console.log(err);
-    }else {
-      program.findOneAndUpdate({users: newUsers._id}, function(err, found) {
-        if(err){
-          console.log(err);
-        }else {
-          found.users.push(newUsers);
-          found.save();
-
-          res.json(found);
-        }
-      });
-    }
-  });
-});*/
-
-router.post('/login', ctrlAuth.login);
-
+//create subscription
 router.post('/subscription',function(req,res){
   userId = req.body.userId;
   bookId = req.body.bookId;
@@ -289,5 +267,10 @@ router.post('/subscription',function(req,res){
 
 
 });
+
+
+// authentication
+router.post('/register', ctrlAuth.register);
+router.post('/login', ctrlAuth.login);
 
 module.exports = router;

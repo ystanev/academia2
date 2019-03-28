@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthenticationService, UserDetails } from '../../../services/authentication.service';
+import { AuthenticationService, UserDetails, TokenPayload } from '../../../services/authentication.service';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
@@ -38,7 +38,8 @@ export class AccountComponent implements OnInit {
 
   getUser(uID){
     this.auth.getAUser(uID).subscribe(user => {
-      this.details = user;
+      //this.details = user;
+      //console.log(this.details);
       this.uID = user._id;
       this.userForm.setValue({
         fName: user.fname,

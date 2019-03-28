@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyMaterialModule } from  './material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,7 @@ import { AccountComponent } from './components/home/account/account.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { PaymentComponent } from './components/home/payment/payment.component';
 import { BookDetailsComponent } from './components/home/book-details/book-details.component';
+import { BookViewComponent } from './components/home/book-view/book-view.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { BookDetailsComponent } from './components/home/book-details/book-detail
     AccountComponent,
     PaymentComponent,
     FilterPipe,
-    BookDetailsComponent
+    BookDetailsComponent,
+    BookViewComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ import { BookDetailsComponent } from './components/home/book-details/book-detail
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MyMaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    PdfViewerModule
   ],
   providers: [
     AuthenticationService, 

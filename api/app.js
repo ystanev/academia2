@@ -43,6 +43,8 @@ app.use(cors());
 // [SH] Initialise Passport before using the route middleware
 app.use(passport.initialize());
 
+app.use('/static', express.static('public'));
+
 // [SH] Use the API routes when path starts with /api
 app.use('/api', routesApi);
 

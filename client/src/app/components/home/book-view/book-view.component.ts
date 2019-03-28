@@ -14,7 +14,7 @@ export class BookViewComponent implements OnInit {
   book: any;
 
   mediaType = 'application/pdf';
-  src: String | PDFSource | ArrayBuffer = 'https://localhost:3000/api/public/upload/4CC3.pdf';
+  src: String | PDFSource | ArrayBuffer = 'http://localhost:3000/static/uploads/';
 
   constructor(private http: HttpClient, private route: ActivatedRoute, 
     private router: Router, private auth: AuthenticationService) { }
@@ -27,7 +27,7 @@ export class BookViewComponent implements OnInit {
     this.auth.getBook(id).subscribe(data => {
       //console.log(data.bookPath);
       this.book = data;
-      //data.bookPath = this.pdfSrc;
+      this.src = this.src + data.bookPath;
     });
 
   }

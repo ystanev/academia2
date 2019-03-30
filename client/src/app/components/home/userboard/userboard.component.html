@@ -35,21 +35,41 @@
 
 <!-- BOOK CARDS -->
 <div class="container-fluid" style="overflow-x: scroll;">
-    <h2>Available Books</h2>
-    <div class="row flex-row flex-nowrap">
-      <mat-card class="col-xs-3 example-card margin-1" style="background-color: lightblue;"  *ngFor="let items of allBooksProg">
-        <div *ngIf="items.program == this.details.program">
-          <mat-card-header style="text-align: center;">
-            <mat-card-title>{{items.bookName}}</mat-card-title>
-          </mat-card-header>
-          <mat-card-content style="text-align: center;">
-            <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp; {{items.bookAuthor}}</p>
-            <p><i class="glyphicon glyphicon-barcode light-red lighter bigger-120"></i>&nbsp; {{items.bookIsbn}}</p>
-          </mat-card-content>
-          <mat-card-actions style="text-align: center;">
-            <button mat-button (click)="openBook(items._id)">OPEN</button>
-          </mat-card-actions>
-        </div>
-      </mat-card>
-    </div>
+  <h2>Subscribed Books</h2>
+  <div class="row flex-row flex-nowrap">
+    <mat-card class="col-xs-3 example-card margin-1" style="background-color: lightblue;"  *ngFor="let items of subBooks">
+      <!--<div *ngIf="items.program == this.details.program">-->
+        <mat-card-header style="text-align: center;">
+          <mat-card-title>{{items.bookName}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content style="text-align: center;">
+          <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp; {{items.bookAuthor}}</p>
+          <p><i class="glyphicon glyphicon-barcode light-red lighter bigger-120"></i>&nbsp; {{items.bookIsbn}}</p>
+        </mat-card-content>
+        <mat-card-actions style="text-align: center;">
+          <button mat-button (click)="openSubBook(items._id)">OPEN</button>
+        </mat-card-actions>
+      <!--</div>-->
+    </mat-card>
   </div>
+</div>
+
+<div class="container-fluid" style="overflow-x: scroll;">
+  <h2>Available Books</h2>
+  <div class="row flex-row flex-nowrap">
+    <mat-card class="col-xs-3 example-card margin-1" style="background-color: lightblue;"  *ngFor="let items1 of allBooks">
+      <div *ngIf="items1.program == this.details.program._id">
+        <mat-card-header style="text-align: center;">
+          <mat-card-title>{{items1.bookName}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content style="text-align: center;">
+          <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp; {{items1.bookAuthor}}</p>
+          <p><i class="glyphicon glyphicon-barcode light-red lighter bigger-120"></i>&nbsp; {{items1.bookIsbn}}</p>
+        </mat-card-content>
+        <mat-card-actions style="text-align: center;">
+          <button mat-button (click)="openBook(items1._id)">OPEN</button>
+        </mat-card-actions>
+      </div>
+    </mat-card>
+  </div>
+</div>

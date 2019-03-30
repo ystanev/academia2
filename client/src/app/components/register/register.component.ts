@@ -77,13 +77,18 @@ export class RegisterComponent implements OnInit {
   */
   
   registerUser() {
-    //debugger
-    this.auth.register(this.credentials).subscribe(() => {
-      console.log(this.credentials);
-      this.router.navigateByUrl('/home');
-    }, (err) => {
-      console.error(err);
-    });
+    if(this.credentials.email && this.credentials.password){
+
+      this.auth.register(this.credentials).subscribe(data => {
+        //console.log(this.credentials);
+        this.router.navigateByUrl('/home');
+                
+      }, (err) => {
+        console.error(err);
+      });
+    }else {
+      alert("Please don't leave any field blank");
+    }
   }
 
 }

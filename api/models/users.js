@@ -28,14 +28,25 @@ var userSchema = new mongoose.Schema({
   /*roles: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Role'
+  },
+  password: {
+    type: String,  
   },*/
   hash: String,
   salt: String
 }, {timestamps: true});
 
+// Custom validation for email
+userSchema.path('email').validate((val) => {
+  emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return emailRegex.test(val);
+}, 'Invalid e-mail.');
+
 userSchema.methods.setPassword = function(password){
   this.salt = crypto.randomBytes(16).toString('hex');
   this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+  //password = this.salt + this.hash;
+  //this.password = password;
 };
 
 userSchema.methods.validPassword = function(password) {

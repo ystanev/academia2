@@ -9,7 +9,7 @@ module.exports.add = function(req, res) {
 
   // program.programCode = req.body.programCode;
   program.programName = req.body.programName;
-  program.users = req.params.users._id;
+  //program.users = req.params.users._id;
   
   //program.users.push(user);
   program.save(function(err) {

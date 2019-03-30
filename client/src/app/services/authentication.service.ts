@@ -45,6 +45,10 @@ export class AuthenticationService {
     this.token = token;
   }
 
+  deleteToken() {
+    localStorage.removeItem('mean-token');
+  }
+
   private getToken(): string {
     if (!this.token) {
       this.token = localStorage.getItem('mean-token');
@@ -134,6 +138,14 @@ export class AuthenticationService {
 
   public addSubscription(subscription): Observable<any> {
     return this.http.post('/api/subscription', subscription).pipe(catchError(this.handleError));
+  }
+
+  public getSubscriptions(): Observable<any> {
+    return this.http.get('/api/subscription').pipe(catchError(this.handleError));
+  }
+
+  public getASubscription(uId): Observable<any> {
+    return this.http.get(`/api/subscription/${uId}`).pipe(catchError(this.handleError));
   }
 
   public getBook(bID): Observable<any> {

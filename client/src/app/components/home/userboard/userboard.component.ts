@@ -45,12 +45,17 @@ export class UserboardComponent implements OnInit {
   }
 
   showSubscribed(id){
-    this.auth.getASubscription(id).subscribe(subs => {
-      
-      this.subBooks = subs.bookRef;
-    }, (err) => {
-      console.error(err);
-    });
+    if(this.auth.getASubscription(id) != null){
+      this.auth.getASubscription(id).subscribe(subs => {
+            
+            this.subBooks = subs.bookRef;
+      }, (err) => {
+            console.error(err);
+      });
+    }else {
+      console.log("no books found");
+    }
+    
   }
 
   searchForBooksFocusIn()

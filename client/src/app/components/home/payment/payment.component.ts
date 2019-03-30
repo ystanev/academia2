@@ -1,4 +1,7 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, Inject } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { AuthenticationService, UserDetails } from '../../../services/authentication.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 declare let paypal: any;
 
@@ -9,7 +12,13 @@ declare let paypal: any;
 })
 export class PaymentComponent implements OnInit {
 
-  constructor() { }
+  book: any;
+  constructor(public dialogRef: MatDialogRef<PaymentComponent>, 
+    private route: ActivatedRoute, private router: Router, private auth: AuthenticationService) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
   ngOnInit() {
   }
@@ -38,6 +47,9 @@ export class PaymentComponent implements OnInit {
     onAuthorize: (data, actions) => {
       return actions.payment.execute().then((payment) => {
         // Do something when payment is successful.
+        this.onNoClick();
+        //this.purchase();
+        console.log("Payment was successful");
       });
     }
   };

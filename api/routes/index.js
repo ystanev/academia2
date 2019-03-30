@@ -63,11 +63,17 @@ router.delete('/user/:id', function(req, res, next) {
 
 //create a book
 router.post('/books', function(req, res, next) {
+  userId  = req.body.userId;
+  programId = req.body.programId;
   book.create(req.body, function(err, post) {
     if(err){
       return next(err);
     }
+    //console.log(post);
+    
     res.json(post);
+
+    //program.findOneAndUpdate();
   });
 });
 

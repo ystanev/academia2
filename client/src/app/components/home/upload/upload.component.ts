@@ -12,30 +12,47 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 export class UploadComponent implements OnInit {
 
   id: any;
+  allProgs:any;
+  uID:any;
   bookForm: FormGroup;
   bookIsbn:string='';
   bookName:string='';
   bookAuthor:string='';
   bookPath:string = '';
   bookPrice:string = '';
-  //program:string = '';
+  program:string = '';
+  uploadedBy:string = '';
 
   fileToUpload: File = null;
   constructor(private router: Router, private route: ActivatedRoute, 
     private auth: AuthenticationService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.bookForm = this.formBuilder.group({
-      'bookIsbn' : [null, Validators.required],
-      'bookName' : [null, Validators.required],
-      'bookAuthor' : [null, Validators.required],
-      'bookPath' : [null, Validators.required],
-      'bookPrice' : [null, Validators.required]
+    this.getAllPrograms();
+    this.auth.profile().subscribe(user => {
+      this.bookForm = this.formBuilder.group({
+        'bookIsbn' : [null, Validators.required],
+        'bookName' : [null, Validators.required],
+        'bookAuthor' : [null, Validators.required],
+        'bookPath' : [null, Validators.required],
+        'bookPrice' : [null, Validators.required],
+        'program' : [null, Validators.required],
+        'uploadedBy' : user._id
+      });
     });
   }
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
+  }
+
+  getAllPrograms(){
+    this.auth.getAllPrograms().subscribe(programs => {
+      this.allProgs = programs;
+    }, (err) => {
+      console.error(err);
+    });
+
   }
   
   onFormSubmit(form: NgForm){
@@ -63,6 +80,11 @@ export class UploadComponent implements OnInit {
     }, (err) => {
       console.log(err);
     });
+  }
+
+  onChange(event){
+    this.program =  event.target.value;
+    console.log(this.program);
   }
 
   uploadBook(){

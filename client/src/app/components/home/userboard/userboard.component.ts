@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, UserDetails } from '../../../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { nextContext } from '@angular/core/src/render3';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class UserboardComponent implements OnInit {
   u: any;
   showPop:boolean = false;
   searchBoxClicked:boolean = false;
+  booksAvailable:boolean = false;
+  booksAvailableMsg:boolean = false;
   
   constructor(private auth: AuthenticationService, private router: Router) { }
 
@@ -26,31 +29,39 @@ export class UserboardComponent implements OnInit {
       this.details = user;
       //console.log(user);
       this.auth.getAllBooks().subscribe(books => {
-        //this.details = user;
         this.allBooks = books;
-        //this.allBooksArr = [];
-        //console.log(books);
-        //for(this.u of this.allBooks){
+        // this.allBooksArr = [];
+        // for(this.u of this.allBooks){
         //  this.allBooksArr.push(this.allBooks[this.u]);
-        //}
-        //console.log(this.allBooks);
-        
+        // }
+        for(let i = 0; i < this.allBooks.length; i++)
+        {
+          console.log(this.allBooks[i].program);
+          if(user.program._id == this.allBooks[i].program)
+          {
+            this.booksAvailable = true;
+            this.booksAvailableMsg = false;
+            break;
+          }
+          else{
+            this.booksAvailable = false;
+            this.booksAvailableMsg = true;
+          }
+        }
       }, (err) => {
         console.error(err);
       });
       
-      //console.log(user._id);
       this.showSubscribed(user._id);
     });
   }
 
   showSubscribed(id){
-    this.auth.getASubscription(id).subscribe(subs => {
-      
-      this.subBooks = subs.bookRef;
-    }, (err) => {
-      console.error(err);
-    });
+      this.auth.getASubscription(id).subscribe(subs => {
+        this.subBooks = subs.bookRef;
+      }, (err) => {
+        console.error(err);
+      });
   }
 
   searchForBooksFocusIn()

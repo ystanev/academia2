@@ -23,6 +23,9 @@
           <span *ngIf="!bookForm.get('bookAuthor').valid && bookForm.get('bookAuthor').touched">Please enter Book Author</span>
         </mat-error>
       </mat-form-field>
+      <select (change)="onChange($event)" formControlName="program" class="form-control col-lg-8">
+          <option *ngFor="let items of allProgs;" [value]="items._id">{{items.programName}}</option>    
+       </select>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Price" formControlName="bookPrice"
                [errorStateMatcher]="matcher">

@@ -12,6 +12,7 @@ export class UserboardComponent implements OnInit {
 
   details: UserDetails;
   allBooks: any;
+  subBooks: any;
   allBooksArr: any;
   u: any;
   showPop:boolean = false;
@@ -21,21 +22,34 @@ export class UserboardComponent implements OnInit {
 
   ngOnInit() {
     this.auth.profile().subscribe(user => {
+      this.details = user;
+      //console.log(user);
       this.auth.getAllBooks().subscribe(books => {
-        this.details = user;
+        //this.details = user;
         this.allBooks = books;
         //this.allBooksArr = [];
         //console.log(books);
-        /*for(this.u of this.allBooks){
-          this.allBooksArr.push(this.allBooks[this.u]);
-        }*/
+        //for(this.u of this.allBooks){
+        //  this.allBooksArr.push(this.allBooks[this.u]);
+        //}
         //console.log(this.allBooks);
         
       }, (err) => {
         console.error(err);
       });
+      
+      //console.log(user._id);
+      this.showSubscribed(user._id);
     });
-    
+  }
+
+  showSubscribed(id){
+    this.auth.getASubscription(id).subscribe(subs => {
+      
+      this.subBooks = subs.bookRef;
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   searchForBooksFocusIn()
@@ -51,6 +65,12 @@ export class UserboardComponent implements OnInit {
   openBook(id)
   {
     console.log(id);
-    this.router.navigate(['/home/book-view',id]);
+    this.router.navigate(['/home/bookDetails',id]);
+  }
+
+  openSubBook(id)
+  {
+    console.log(id);
+    this.router.navigate(['/home/book-view', id]);
   }
 }

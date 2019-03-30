@@ -32,10 +32,10 @@ export class BookViewComponent implements OnInit {
 
   }
 
-  downloadFile(data: any){
+  /*downloadFile(data: any){
     const blob = new Blob([data], { type: this.mediaType});
     this.src = window.URL.createObjectURL(blob);
-  }
+  }*/
 
   viewBook(id){
     //this.router.navigate(['/home/userboard/book-view'], id);

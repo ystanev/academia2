@@ -264,9 +264,29 @@ router.post('/subscription',function(req,res){
       }
     }
   });
-
-
 });
+
+////////
+router.get('/subscription', function(req, res) {
+  subscription.find({}, function(err, subs) {
+    if(err){
+      console.log(err);
+    }else {
+      res.json(subs);
+    }
+  }).populate('userRef').populate('bookRef').exec();
+});
+
+router.get('/subscription/:id', function(req, res) {
+  subscription.findOne({"userRef" : req.params.id}, function(err, sub) {
+    if(err){
+      console.log(err);
+    }else {
+      res.json(sub);
+    }
+  }).populate('userRef').populate('bookRef').exec();
+});
+////////////
 
 
 // authentication

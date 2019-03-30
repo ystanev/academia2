@@ -140,6 +140,14 @@ export class AuthenticationService {
     return this.http.post('/api/subscription', subscription).pipe(catchError(this.handleError));
   }
 
+  public getSubscriptions(): Observable<any> {
+    return this.http.get('/api/subscription').pipe(catchError(this.handleError));
+  }
+
+  public getASubscription(uId): Observable<any> {
+    return this.http.get(`/api/subscription/${uId}`).pipe(catchError(this.handleError));
+  }
+
   public getBook(bID): Observable<any> {
     const url = `/api/books/${bID}`;
     return this.http.get(url);

@@ -9,7 +9,7 @@ module.exports.profileRead = function(req, res) {
     });
   } else {
     User
-      .findById(req.payload._id)
+      .findById(req.payload._id).populate('program')
       .exec(function(err, user) {
         res.status(200).json(user);
       });

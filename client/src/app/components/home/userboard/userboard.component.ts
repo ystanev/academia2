@@ -22,6 +22,7 @@ export class UserboardComponent implements OnInit {
 
   ngOnInit() {
     this.auth.profile().subscribe(user => {
+
       this.details = user;
       //console.log(user);
       this.auth.getAllBooks().subscribe(books => {

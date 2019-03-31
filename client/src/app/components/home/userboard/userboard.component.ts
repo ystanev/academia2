@@ -14,9 +14,11 @@ export class UserboardComponent implements OnInit {
   allBooks: any;
   subBooks: any;
   allBooksArr: any;
+  subBookArr: any;
   u: any;
   showPop:boolean = false;
   searchBoxClicked:boolean = false;
+  showCard: boolean = true;
   
   constructor(private auth: AuthenticationService, private router: Router) { }
 
@@ -24,10 +26,43 @@ export class UserboardComponent implements OnInit {
     this.auth.profile().subscribe(user => {
 
       this.details = user;
-      //console.log(user);
+      this.showSubscribed(user._id);
+
+      //debugger
       this.auth.getAllBooks().subscribe(books => {
         //this.details = user;
         this.allBooks = books;
+        
+        
+        //console.log(this.allBooks);
+        /*this.auth.getASubscription(user._id).subscribe(bb => {
+          //console.log(bb);
+          this.subBookArr = bb;
+          //console.log(this.allBooks[1]._id);
+          /*for(let i = 0; i < this.allBooks.length; i++){
+            //console.log(this.subBookArr.bookRef[i]._id);
+            //break;
+            if(this.allBooks[i]._id == this.subBookArr[i]._id){
+              console.log(this.subBookArr.bookRef[i]._id);
+              break;
+            }
+          }
+        });*/
+        
+
+        /*for(let b of books){
+          //console.log(b.uploadedBy);
+          if(b.program == user.program._id){
+            console.log("works");
+            //this.allBooks = books;            
+          }
+          if(b.uploadedBy){
+            //this.showCard = false;
+            console.log("works");
+          }
+        }*/
+        //console.log(books);
+        
         //this.allBooksArr = [];
         //console.log(books);
         //for(this.u of this.allBooks){
@@ -40,7 +75,7 @@ export class UserboardComponent implements OnInit {
       });
       
       //console.log(user._id);
-      this.showSubscribed(user._id);
+      //this.showSubscribed(user._id);
     });
   }
 
@@ -48,14 +83,13 @@ export class UserboardComponent implements OnInit {
     if(this.auth.getASubscription(id) != null){
       this.auth.getASubscription(id).subscribe(subs => {
             
-            this.subBooks = subs.bookRef;
+        this.subBooks = subs.bookRef;
       }, (err) => {
             console.error(err);
       });
     }else {
       console.log("no books found");
     }
-    
   }
 
   searchForBooksFocusIn()

@@ -14,11 +14,14 @@ import { MatDialog } from '@angular/material';
 export class BookDetailsComponent implements OnInit {
 
   book: any;
+  purchShow:boolean = false;
+  purchShowMsg:boolean = false;
 
   constructor(public dialog: MatDialog, private route: ActivatedRoute, private router: Router, private auth: AuthenticationService) { }
 
   ngOnInit() {
     this.getBookDetails(this.route.snapshot.params['id']);
+    
   }
 
   getBookDetails(id: any){
@@ -29,7 +32,13 @@ export class BookDetailsComponent implements OnInit {
   }
 
   purchase(){
-    let userDetails = this.auth.getUserDetails()
+
+  }
+  
+  openPaypal(){
+    //debugger
+   // this.purchase();
+   let userDetails = this.auth.getUserDetails()
     let userId = userDetails._id;
     let bookId = this.book._id;
 
@@ -40,27 +49,26 @@ export class BookDetailsComponent implements OnInit {
 
     this.auth.addSubscription(subscription).subscribe(data => {
       if(data.alreadyExists != null && data.alreadyExists){
-        alert("Book Already Purchased");
+        this.purchShowMsg = true;
       }else{
+        this.purchShowMsg = false;
         //this.router.navigate(['/home/userboard']);
+        const dialogRef = this.dialog.open(PaymentComponent, {
+          width: '250px',
+          //data: {name: this.name, animal: this.animal}
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          //this.animal = result;
+        });
+        
       }
     }, (err) => {
       console.log(err);
     });
 
-  }
-
-  openPaypal(){
-    this.purchase();
-    const dialogRef = this.dialog.open(PaymentComponent, {
-      width: '250px',
-      //data: {name: this.name, animal: this.animal}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      //this.animal = result;
-    });
+    
   }
 
 }

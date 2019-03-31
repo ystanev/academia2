@@ -23,20 +23,13 @@
                 <span *ngIf="!userForm.get('email').valid && userForm.get('email').touched">Please enter Book Author</span>
               </mat-error>
             </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <textarea matInput placeholder="password" formControlName="password"
-                     [errorStateMatcher]="matcher"></textarea>
-              <mat-error>
-                <span *ngIf="!userForm.get('password').valid && userForm.get('password').touched">Please enter Book Description</span>
-              </mat-error>
-            </mat-form-field>
-            <!--<mat-form-field class="example-full-width">
-              <input matInput placeholder="newPassword" formControlName="newPassword"
-                     [errorStateMatcher]="matcher">
-              <mat-error>
-                <span *ngIf="!userForm.get('newPassword').valid && userForm.get('newPassword').touched">Please enter Publisher</span>
-              </mat-error>
-            </mat-form-field>-->
+            <br/>
+            
+            <div>
+              <button mat-raised-button color="primary">Change Password</button>
+            </div>
+            <br/>
+            <br/>
             <mat-form-field class="example-full-width">
               <input matInput placeholder="program" formControlName="program"
                      [errorStateMatcher]="matcher">
@@ -71,6 +64,21 @@
         </tbody>
       </table>
     </mat-tab>
-    <mat-tab label="Settings">Content 3</mat-tab>
+    <mat-tab label="Settings">
+      <!--<mat-form-field class="example-full-width">
+        <textarea matInput placeholder="password" formControlName="password"
+               [errorStateMatcher]="matcher"></textarea>
+        <mat-error>
+          <span *ngIf="!userForm.get('password').valid && userForm.get('password').touched">Please enter Book Description</span>
+        </mat-error>
+      </mat-form-field>-->
+      <!--<mat-form-field class="example-full-width">
+        <input matInput placeholder="newPassword" formControlName="newPassword"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!userForm.get('newPassword').valid && userForm.get('newPassword').touched">Please enter Publisher</span>
+        </mat-error>
+      </mat-form-field>-->
+    </mat-tab>
   </mat-tab-group>
 </div>

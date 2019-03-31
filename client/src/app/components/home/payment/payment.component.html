@@ -1,3 +1,12 @@
-<input type="number" [(ngModel)]="finalAmount" style="padding-bottom: 10px;">
-<h2 *ngIf="paypalLoad">Paypal button is loading</h2>
-<div id="paypal-checkout-btn"></div>
+<div>
+  <h1 mat-dialog-title>Payment</h1>
+  <div mat-dailog-content>
+      <input matInput type="number" [(ngModel)]="finalAmount" style="padding-bottom: 10px;">
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <h2 *ngIf="paypalLoad">Paypal button is loading</h2>
+    <div id="paypal-checkout-btn"></div>
+  </div>
+  
+</div>

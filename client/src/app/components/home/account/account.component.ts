@@ -17,7 +17,7 @@ export class AccountComponent implements OnInit {
   fName: string = '';
   lName: string = '';
   email: string = '';
-  password: string = '';
+  //password: string = '';
   program: string = '';
 
   constructor(private auth: AuthenticationService, private route: ActivatedRoute,
@@ -29,7 +29,7 @@ export class AccountComponent implements OnInit {
       'fName' : [null, Validators.required],
       'lName' : [null, Validators.required],
       'email' : [null, Validators.required],
-      'password' : [null, Validators.required],
+      //'password' : [null, Validators.required],
       'program' : [null, Validators.required],
     });
 
@@ -45,7 +45,7 @@ export class AccountComponent implements OnInit {
         fName: user.fname,
         lName: user.lname,
         email: user.email,
-        password: user.email,
+        //password: user.email,
         program: user.program.programName
       });
     });

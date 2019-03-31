@@ -1,75 +1,79 @@
 <style>
-  .row > .col-xs-3 {
-      flex: 0 0 25%;
-      max-width: 25%
-  }
-
-  .flex-nowrap {
-      -webkit-flex-wrap: nowrap!important;
-      -ms-flex-wrap: nowrap!important;
-      flex-wrap: nowrap!important;
-  }
-  .flex-row {
-      display:flex;
-      -webkit-box-orient: horizontal!important;
-      -webkit-box-direction: normal!important;
-      -webkit-flex-direction: row!important;
-      -ms-flex-direction: row!important;
-      flex-direction: row!important;
-  }
-
-
-  .well {
-      min-height: 300px;
-      width: 100%;
-  }
-</style>
-
-<!-- Search form -->
-<div>
-  <input class="form-control col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10" [(ngModel)]="searchText" (focus)="searchForBooksFocusIn()" (focusout)="searchForBooksFocusOut()" style="margin-top:10px;margin-bottom: 10px;padding:25px;font-size: 20px;border-radius: 15px;" type="search" placeholder="Search" aria-label="Search" />
-    <ul *ngIf="searchBoxClicked">
-      <li *ngFor="let items of allBooks | filter: searchText">{{items.bookName}}</li>
-    </ul>
-</div>
-
-<!-- BOOK CARDS -->
-<div class="container-fluid" style="overflow-x: scroll;">
-  <h2>Subscribed Books</h2>
-  <div class="row flex-row flex-nowrap">
-    <mat-card class="col-xs-3 example-card margin-1" style="background-color: lightblue;"  *ngFor="let items of subBooks">
-      <!--<div *ngIf="items.program == this.details.program">-->
-        <mat-card-header style="text-align: center;">
-          <mat-card-title>{{items.bookName}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content style="text-align: center;">
-          <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp; {{items.bookAuthor}}</p>
-          <p><i class="glyphicon glyphicon-barcode light-red lighter bigger-120"></i>&nbsp; {{items.bookIsbn}}</p>
-        </mat-card-content>
-        <mat-card-actions style="text-align: center;">
-          <button mat-button (click)="openSubBook(items._id)">OPEN</button>
-        </mat-card-actions>
-      <!--</div>-->
-    </mat-card>
+    .row > .col-xs-3 {
+        flex: 0 0 25%;
+        max-width: 25%
+    }
+  
+    .flex-nowrap {
+        -webkit-flex-wrap: nowrap!important;
+        -ms-flex-wrap: nowrap!important;
+        flex-wrap: nowrap!important;
+    }
+    .flex-row {
+        display:flex;
+        -webkit-box-orient: horizontal!important;
+        -webkit-box-direction: normal!important;
+        -webkit-flex-direction: row!important;
+        -ms-flex-direction: row!important;
+        flex-direction: row!important;
+    }
+  
+  
+    .well {
+        min-height: 300px;
+        width: 100%;
+    }
+  </style>
+  
+  <!-- Search form -->
+  <div>
+    <input class="form-control col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10" [(ngModel)]="searchText" (focus)="searchForBooksFocusIn()" (focusout)="searchForBooksFocusOut()" style="margin-top:10px;margin-bottom: 10px;padding:25px;font-size: 20px;border-radius: 15px;" type="search" placeholder="Search" aria-label="Search" />
+      <ul *ngIf="searchBoxClicked">
+        <li *ngFor="let items of allBooks | filter: searchText">{{items.bookName}}</li>
+      </ul>
   </div>
-</div>
-
-<div class="container-fluid" style="overflow-x: scroll;">
-  <h2>Available Books</h2>
-  <div class="row flex-row flex-nowrap">
-    <mat-card class="col-xs-3 example-card margin-1" style="background-color: lightblue;"  *ngFor="let items1 of allBooks">
-      <div *ngIf="items1.program == this.details.program._id">
-        <mat-card-header style="text-align: center;">
-          <mat-card-title>{{items1.bookName}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content style="text-align: center;">
-          <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp; {{items1.bookAuthor}}</p>
-          <p><i class="glyphicon glyphicon-barcode light-red lighter bigger-120"></i>&nbsp; {{items1.bookIsbn}}</p>
-        </mat-card-content>
-        <mat-card-actions style="text-align: center;">
-          <button mat-button (click)="openBook(items1._id)">OPEN</button>
-        </mat-card-actions>
-      </div>
-    </mat-card>
+  
+  <!-- BOOK CARDS -->
+  <div class="container-fluid" style="overflow-x: scroll;">
+    <h2>Subscribed Books</h2>
+    <div class="row flex-row flex-nowrap">
+      <mat-card class="col-xs-3 example-card margin-1" style="background-color: lightblue;"  *ngFor="let items of subBooks">
+        <!--<div *ngIf="items.program == this.details.program">-->
+          <mat-card-header style="text-align: center;">
+            <mat-card-title>{{items.bookName}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content style="text-align: center;">
+            <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp; {{items.bookAuthor}}</p>
+            <p><i class="glyphicon glyphicon-barcode light-red lighter bigger-120"></i>&nbsp; {{items.bookIsbn}}</p>
+          </mat-card-content>
+          <mat-card-actions style="text-align: center;">
+            <button mat-button (click)="openSubBook(items._id)">OPEN</button>
+          </mat-card-actions>
+        <!--</div>-->
+      </mat-card>
+    </div>
   </div>
-</div>
+  
+  <div class="container-fluid" style="overflow-x: scroll;">
+    <h2>Available Books</h2>
+    <div *ngIf="booksAvailableMsg">
+      <h3>Currently there are no books available for your program! :( </h3>
+    </div>
+    <div *ngIf="booksAvailable" class="row flex-row flex-nowrap">
+      <mat-card class="col-xs-3 example-card margin-1" style="background-color: lightblue;"  *ngFor="let items1 of allBooks">
+        <div>
+          <mat-card-header style="text-align: center;">
+            <mat-card-title>{{items1.bookName}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content style="text-align: center;">
+            <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp; {{items1.bookAuthor}}</p>
+            <p><i class="glyphicon glyphicon-barcode light-red lighter bigger-120"></i>&nbsp; {{items1.bookIsbn}}</p>
+          </mat-card-content>
+          <mat-card-actions style="text-align: center;">
+            <button mat-button (click)="openBook(items1._id)">OPEN</button>
+          </mat-card-actions>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  

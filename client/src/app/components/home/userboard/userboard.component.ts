@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, UserDetails } from '../../../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { nextContext } from '@angular/core/src/render3';
 
 
 @Component({
@@ -14,42 +15,44 @@ export class UserboardComponent implements OnInit {
   allBooks: any;
   subBooks: any;
   allBooksArr: any;
-  subBookArr: any;
   u: any;
   showPop:boolean = false;
   searchBoxClicked:boolean = false;
-  showCard: boolean = true;
+  booksAvailable:boolean = false;
+  booksAvailableMsg:boolean = false;
   
   constructor(private auth: AuthenticationService, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(){
     this.auth.profile().subscribe(user => {
-
-      this.details = user;
       this.showSubscribed(user._id);
-
-      
+      this.details = user;
       this.auth.getAllBooks().subscribe(books => {
-     
-        this.allBooks = books;
-        
-      }, (err) => {
-        console.error(err);
+        this.auth.getBooksByProgram(user.program._id).subscribe(bbprog => {
+          for(let i = 0; i < bbprog.length; i++)
+          {
+            this.allBooks = bbprog;
+            if(user.program._id == bbprog[i].program)
+            {
+              this.booksAvailable = true;
+              this.booksAvailableMsg = false;
+            }
+            else{
+              this.booksAvailable = false;
+              this.booksAvailableMsg = true;
+            }
+          }
+        });
       });
     });
   }
 
   showSubscribed(id){
-    if(this.auth.getASubscription(id) != null){
       this.auth.getASubscription(id).subscribe(subs => {
-            
         this.subBooks = subs.bookRef;
       }, (err) => {
-            console.error(err);
+        console.error(err);
       });
-    }else {
-      console.log("no books found");
-    }
   }
 
   searchForBooksFocusIn()

@@ -61,7 +61,7 @@
     </div>
     <div *ngIf="booksAvailable" class="row flex-row flex-nowrap">
       <mat-card class="col-xs-3 example-card margin-1" style="background-color: lightblue;"  *ngFor="let items1 of allBooks">
-        <div *ngIf="items1.program == this.details.program._id">
+        <div>
           <mat-card-header style="text-align: center;">
             <mat-card-title>{{items1.bookName}}</mat-card-title>
           </mat-card-header>

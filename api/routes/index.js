@@ -101,6 +101,16 @@ router.put('/books/:id', function(req, res, next) {
   })
 });
 
+//get a book by program
+router.get('/book/:id', function(req, res, next) {
+  book.find({"program": req.params.id}, function(err, post) {
+    if(err){
+      return next(err);
+    }
+    res.json(post);
+  });
+})
+
 //delete a book
 router.delete('/books/:id', function(req, res, next) {
   book.findByIdAndRemove(req.params.id, req.body, function(err, post) {

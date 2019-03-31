@@ -13,6 +13,7 @@ export interface UserDetails {
   //roles: string;
   exp: number;
   iat: number;
+  booksByProrgam:string;
 }
 
 interface TokenResponse {
@@ -151,6 +152,14 @@ export class AuthenticationService {
   public getBook(bID): Observable<any> {
     const url = `/api/books/${bID}`;
     return this.http.get(url);
+  }
+
+  public getBooksByProgram(uProg): Observable<any> {
+    // if(bProg == uProg)
+    // {
+      const url = `/api/book/${uProg}`;
+      return this.http.get(url);
+    // }
   }
 
   public updateABook(bID, book): Observable<any> {

@@ -28,54 +28,14 @@ export class UserboardComponent implements OnInit {
       this.details = user;
       this.showSubscribed(user._id);
 
-      //debugger
+      
       this.auth.getAllBooks().subscribe(books => {
-        //this.details = user;
+     
         this.allBooks = books;
-        
-        
-        //console.log(this.allBooks);
-        /*this.auth.getASubscription(user._id).subscribe(bb => {
-          //console.log(bb);
-          this.subBookArr = bb;
-          //console.log(this.allBooks[1]._id);
-          /*for(let i = 0; i < this.allBooks.length; i++){
-            //console.log(this.subBookArr.bookRef[i]._id);
-            //break;
-            if(this.allBooks[i]._id == this.subBookArr[i]._id){
-              console.log(this.subBookArr.bookRef[i]._id);
-              break;
-            }
-          }
-        });*/
-        
-
-        /*for(let b of books){
-          //console.log(b.uploadedBy);
-          if(b.program == user.program._id){
-            console.log("works");
-            //this.allBooks = books;            
-          }
-          if(b.uploadedBy){
-            //this.showCard = false;
-            console.log("works");
-          }
-        }*/
-        //console.log(books);
-        
-        //this.allBooksArr = [];
-        //console.log(books);
-        //for(this.u of this.allBooks){
-        //  this.allBooksArr.push(this.allBooks[this.u]);
-        //}
-        //console.log(this.allBooks);
         
       }, (err) => {
         console.error(err);
       });
-      
-      //console.log(user._id);
-      //this.showSubscribed(user._id);
     });
   }
 

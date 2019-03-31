@@ -23,36 +23,27 @@ export class UserboardComponent implements OnInit {
   
   constructor(private auth: AuthenticationService, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(){
     this.auth.profile().subscribe(user => {
-
-      this.details = user;
-      //console.log(user);
-      this.auth.getAllBooks().subscribe(books => {
-        this.allBooks = books;
-        // this.allBooksArr = [];
-        // for(this.u of this.allBooks){
-        //  this.allBooksArr.push(this.allBooks[this.u]);
-        // }
-        for(let i = 0; i < this.allBooks.length; i++)
-        {
-          console.log(this.allBooks[i].program);
-          if(user.program._id == this.allBooks[i].program)
-          {
-            this.booksAvailable = true;
-            this.booksAvailableMsg = false;
-            break;
-          }
-          else{
-            this.booksAvailable = false;
-            this.booksAvailableMsg = true;
-          }
-        }
-      }, (err) => {
-        console.error(err);
-      });
-      
       this.showSubscribed(user._id);
+      this.details = user;
+      this.auth.getAllBooks().subscribe(books => {
+        this.auth.getBooksByProgram(user.program._id).subscribe(bbprog => {
+          for(let i = 0; i < bbprog.length; i++)
+          {
+            this.allBooks = bbprog;
+            if(user.program._id == bbprog[i].program)
+            {
+              this.booksAvailable = true;
+              this.booksAvailableMsg = false;
+            }
+            else{
+              this.booksAvailable = false;
+              this.booksAvailableMsg = true;
+            }
+          }
+        });
+      });
     });
   }
 

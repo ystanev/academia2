@@ -1,8 +1,9 @@
-<h2>PDF Viewer</h2>
+<h2>{{book.bookName}}</h2>
 
-<div>
-    <label>Page:</label>
-    <input type="number" placeholder="Page" [(ngModel)]="page">
+<div *ngIf="isLoaded" style="text-align: center;">
+  <button (click)="prevPage()" [disabled]="page === 1">Prev</button>
+  <span>{{ page }} / {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="page === totalPages">Next</button>
 </div>
 
 <div class="pdf-container" style="width: 850px;height: 1000px;">

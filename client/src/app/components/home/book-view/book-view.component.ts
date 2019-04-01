@@ -12,7 +12,10 @@ import { PDFSource } from 'pdfjs-dist';
 export class BookViewComponent implements OnInit {
 
   book: any;
-
+  page: number = 1;
+  totalPages: number;
+  isLoaded: boolean = false;
+  
   mediaType = 'application/pdf';
   src: String | PDFSource | ArrayBuffer = 'http://localhost:3000/static/uploads/';
 
@@ -37,7 +40,16 @@ export class BookViewComponent implements OnInit {
     this.src = window.URL.createObjectURL(blob);
   }*/
 
-  viewBook(id){
-    //this.router.navigate(['/home/userboard/book-view'], id);
+  afterLoadComplete(pdfData: any) {
+    this.totalPages = pdfData.numPages;
+    this.isLoaded = true;
+  }
+
+  nextPage() {
+    this.page++;
+  }
+
+  prevPage() {
+    this.page--;
   }
 }

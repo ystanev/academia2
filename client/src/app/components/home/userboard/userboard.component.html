@@ -26,11 +26,13 @@
   </style>
   
   <!-- Search form -->
-  <div>
-    <input class="form-control col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10" [(ngModel)]="searchText" (focus)="searchForBooksFocusIn()" (focusout)="searchForBooksFocusOut()" style="margin-top:10px;margin-bottom: 10px;padding:25px;font-size: 20px;border-radius: 15px;" type="search" placeholder="Search" aria-label="Search" />
-      <ul *ngIf="searchBoxClicked">
-        <li *ngFor="let items of allBooks | filter: searchText">{{items.bookName}}</li>
-      </ul>
+  <div class="md-form">
+    <input class="form-control" [(ngModel)]="searchText" (focus)="searchForBooksFocusIn()" (focusout)="searchForBooksFocusOut()" style="margin-top:10px;margin-bottom: 10px;padding:25px;font-size: 20px;border-radius: 15px;" type="search" placeholder="Search" aria-label="Search" />
+      <div *ngIf="searchBoxClicked">
+        <ul *ngFor="let items of allBooks | filter: searchText">
+          <li>{{items.bookName}}</li>
+        </ul>
+      </div>
   </div>
   
   <!-- BOOK CARDS -->

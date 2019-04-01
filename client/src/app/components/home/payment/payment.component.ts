@@ -13,9 +13,12 @@ declare let paypal: any;
 export class PaymentComponent implements OnInit {
 
   book: any;
-  constructor(public dialogRef: MatDialogRef<PaymentComponent>,@Inject(MAT_DIALOG_DATA) public data: any, 
-    private route: ActivatedRoute, private router: Router, private auth: AuthenticationService) {}
-
+  details: UserDetails;
+  allBooks: any;
+  subBooks: any;
+  constructor(public dialogRef: MatDialogRef<PaymentComponent>, 
+    private route: ActivatedRoute, private router: Router, private auth: AuthenticationService, @Inject(MAT_DIALOG_DATA) public data: any) {}
+  
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -26,7 +29,8 @@ export class PaymentComponent implements OnInit {
   addScript = false;
   paypalLoad = true;
 
-  finalAmount = 1;
+  finalAmount:any;
+  notValidMsg:boolean = false;
 
   paypalConfig = {
     env: 'sandbox',
@@ -50,6 +54,7 @@ export class PaymentComponent implements OnInit {
         this.onNoClick();
         //this.purchase();
         console.log("Payment was successful");
+        this.router.navigate(['/home/userboard']);
       });
     }
   };
@@ -63,14 +68,20 @@ export class PaymentComponent implements OnInit {
     }
   }
 
+  calcTotalPrice(event, price)
+  {
+    this.finalAmount = event.target.value * price;
+    console.log("totCost---------------->"+this.finalAmount);
+  }
+
   addPaypalScript() {
-    this.addScript = true;
-    return new Promise((resolve, reject) => {
-      const scripttagElement = document.createElement('script');
-      scripttagElement.src = 'https://www.paypalobjects.com/api/checkout.js';
-      scripttagElement.onload = resolve;
-      document.body.appendChild(scripttagElement);
-    });
+      this.addScript = true;
+      return new Promise((resolve, reject) => {
+        const scripttagElement = document.createElement('script');
+        scripttagElement.src = 'https://www.paypalobjects.com/api/checkout.js';
+        scripttagElement.onload = resolve;
+        document.body.appendChild(scripttagElement);
+      });
   }
 
 }

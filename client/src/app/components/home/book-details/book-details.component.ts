@@ -55,7 +55,7 @@ export class BookDetailsComponent implements OnInit {
         //this.router.navigate(['/home/userboard']);
         const dialogRef = this.dialog.open(PaymentComponent, {
           width: '250px',
-          //data: {name: this.name, animal: this.animal}
+          data: {price: this.book.bookPrice}
         });
     
         dialogRef.afterClosed().subscribe(result => {

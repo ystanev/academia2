@@ -1,7 +1,31 @@
 <div>
   <h1 mat-dialog-title>Payment</h1>
-  <div mat-dailog-content>
-      <input matInput type="number" [(ngModel)]="finalAmount" style="padding-bottom: 10px;">
+  <div>
+    <b>Pick the number of months:</b>
+    <select id="monFreq" (change)="this.calcTotalPrice($event, data.price);">
+      <option>---Select---</option>
+      <option [value]="1">1</option>
+      <option [value]="2">2</option>
+      <option [value]="3">3</option>
+      <option [value]="4">4</option>
+      <option [value]="5">5</option>
+      <option [value]="6">6</option>
+      <option [value]="7">7</option>
+      <option [value]="8">8</option>
+      <option [value]="9">9</option>
+      <option [value]="10">10</option>
+      <option [value]="11">11</option>
+      <option [value]="12">12</option>
+    </select>
+  </div>
+  <div>
+    <b>Price of the book:</b>
+    <p>${{data.price}} / month</p>
+  </div>
+  <div>
+    <b>Total:</b>
+    <p>$<span [(ngModel)]="finalAmount">{{this.finalAmount}}</span></p>
+    <p *ngIf="notValidMsg" style="color:red;">Please select a valid month</p>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>

@@ -4,8 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentComponent } from '../payment/payment.component';
 import { MatDialog } from '@angular/material';
 
-
-
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
@@ -30,10 +28,6 @@ export class BookDetailsComponent implements OnInit {
       this.book = data;
     });
   }
-
-  purchase(){
-
-  }
   
   openPaypal(){
     //debugger
@@ -55,7 +49,7 @@ export class BookDetailsComponent implements OnInit {
         //this.router.navigate(['/home/userboard']);
         const dialogRef = this.dialog.open(PaymentComponent, {
           width: '250px',
-          //data: {name: this.name, animal: this.animal}
+          //data: {price: this.book.bookPrice}
         });
     
         dialogRef.afterClosed().subscribe(result => {

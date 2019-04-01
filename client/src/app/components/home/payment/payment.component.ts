@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewChecked, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { AuthenticationService, UserDetails } from '../../../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -13,7 +13,7 @@ declare let paypal: any;
 export class PaymentComponent implements OnInit {
 
   book: any;
-  constructor(public dialogRef: MatDialogRef<PaymentComponent>, 
+  constructor(public dialogRef: MatDialogRef<PaymentComponent>,@Inject(MAT_DIALOG_DATA) public data: any, 
     private route: ActivatedRoute, private router: Router, private auth: AuthenticationService) {}
 
   onNoClick(): void {

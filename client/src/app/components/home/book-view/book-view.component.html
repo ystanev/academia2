@@ -1,8 +1,19 @@
 <h2>PDF Viewer</h2>
 
-<div class="pdf-container">
+<div>
+    <label>Page:</label>
+    <input type="number" placeholder="Page" [(ngModel)]="page">
+</div>
+
+<div class="pdf-container" style="width: 850px;height: 1000px;">
   <pdf-viewer [src]="src"
               [original-size]="false"
+              [page]="page"
+              [fit-to-page]="true"
+              [show-all]="false"
+              (after-load-complete)="afterLoadComplete($event)"
+              
   ></pdf-viewer>
 </div>
+
 

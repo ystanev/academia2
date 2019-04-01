@@ -55,7 +55,7 @@
   </div>
   
   <div class="container-fluid" style="overflow-x: scroll;">
-    <h2>Available Books</h2>
+    <h2>All Books</h2>
     <div *ngIf="booksAvailableMsg">
       <h3>Currently there are no books available for your program! :( </h3>
     </div>
@@ -66,11 +66,11 @@
             <mat-card-title>{{items1.bookName}}</mat-card-title>
           </mat-card-header>
           <mat-card-content style="text-align: center;">
-            <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp; {{items1.bookAuthor}}</p>
-            <p><i class="glyphicon glyphicon-barcode light-red lighter bigger-120"></i>&nbsp; {{items1.bookIsbn}}</p>
+            <!-- <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp; {{items1.bookAuthor}}</p>
+            <p><i class="glyphicon glyphicon-barcode light-red lighter bigger-120"></i>&nbsp; {{items1.bookIsbn}}</p> -->
           </mat-card-content>
           <mat-card-actions style="text-align: center;">
-            <button mat-button (click)="openBook(items1._id)">OPEN</button>
+            <button mat-button (click)="openBook(items1._id)">VIEW DETAILS</button>
           </mat-card-actions>
         </div>
       </mat-card>

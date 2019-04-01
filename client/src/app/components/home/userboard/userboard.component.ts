@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, UserDetails } from '../../../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { nextContext } from '@angular/core/src/render3';
-
 
 @Component({
   selector: 'app-userboard',

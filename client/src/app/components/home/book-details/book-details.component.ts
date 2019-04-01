@@ -4,8 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentComponent } from '../payment/payment.component';
 import { MatDialog } from '@angular/material';
 
-
-
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
@@ -29,10 +27,6 @@ export class BookDetailsComponent implements OnInit {
       console.log(data);
       this.book = data;
     });
-  }
-
-  purchase(){
-
   }
   
   openPaypal(){

@@ -11,8 +11,9 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 export class AccountComponent implements OnInit {
 
   allBooks:any;
+  subBooks; any;
   uID :any;
-  details: UserDetails;
+  details: any;
   userForm: FormGroup;
   fName: string = '';
   lName: string = '';
@@ -33,13 +34,15 @@ export class AccountComponent implements OnInit {
       'program' : [null, Validators.required],
     });
 
-    //this.getAllBooks();
+    this.getAllBooks();
   }
 
   getUser(uID){
     this.auth.getAUser(uID).subscribe(user => {
-      //this.details = user;
-      //console.log(this.details);
+      this.details = user;
+      console.log(this.details._id);
+      this.showSubscribed(user._id);
+
       this.uID = user._id;
       this.userForm.setValue({
         fName: user.fname,
@@ -61,7 +64,20 @@ export class AccountComponent implements OnInit {
 
   getAllBooks(){
     this.auth.getAllBooks().subscribe(books => {
+      for(let i = 0;i<books.length;i++){
+        console.log(books[i].uploadedBy);
+        //this.allBooks = books[i].uploadedBy;
+      }
+      
       this.allBooks = books;
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  showSubscribed(id){
+    this.auth.getASubscription(id).subscribe(subs => {
+      this.subBooks = subs.bookRef;
     }, (err) => {
       console.error(err);
     });

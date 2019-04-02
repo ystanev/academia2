@@ -1,6 +1,5 @@
 <div class="container">
     <h1>File Upload</h1>
-    
     <form [formGroup]="bookForm" (ngSubmit)="onFormSubmit(bookForm.value)">
       <mat-form-field class="example-full-width">
         <input matInput placeholder="ISBN" formControlName="bookIsbn"
@@ -23,7 +22,7 @@
           <span *ngIf="!bookForm.get('bookAuthor').valid && bookForm.get('bookAuthor').touched">Please enter Book Author</span>
         </mat-error>
       </mat-form-field>
-       <mat-form-field class="example-full-width col-lg-9">
+       <mat-form-field class="example-full-width col-lg-12">
           <mat-label>Program</mat-label>
           <mat-select (change)="onChange($event)" formControlName="program" [errorStateMatcher]="matcher">
               <mat-option>--</mat-option>
@@ -53,10 +52,14 @@
             <span *ngIf="!bookForm.get('bookPath').valid || bookForm.get('bookPath').touched"></span>
           </mat-error>
         </mat-form-field>
+        
       </div>
       <div class="button-row">
         <button type="submit" [disabled]="!bookForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
       </div>
-      <!-- <button type="submit" class="btn" (click)="uploadBook()">Submit</button>-->
     </form>
 </div>
+<!--
+  
+    
+-->

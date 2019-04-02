@@ -1,5 +1,7 @@
 var user = require('../models/users');
 var book = require('../models/books');
+var question = require('../models/questions');
+var reply = require('../models/reply');
 var multer = require('multer');
 const path = require('path');
 var program = require('../models/programs');
@@ -298,6 +300,115 @@ router.get('/subscription/:id', function(req, res) {
 });
 ////////////
 
+/*============================== Questions =============================================*/
+//create a question
+router.post("/questions", (req, res, next) => {
+  //emailId = req.body.emailId;
+  question.create(req.body, (err, post) => {
+    if (err) {
+      return next(err);
+    }
+    res.json(post);
+  });
+});
+
+//get all questions
+router.get("/questions", function(req, res, next) {
+  question.find({}, function(err, ques) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    } else {
+      res.json(ques);
+    }
+  });
+});
+
+//get a question
+router.get("/questions/:id", function(req, res, next) {
+  question.findById(req.params.id, function(err, post) {
+    if (err) {
+      return next(err);
+    }
+    res.json(post);
+  });
+});
+
+//update a question
+router.put("/questions/:id", function(req, res, next) {
+  question.findByIdAndUpdate(req.params.id, req.body, function(err, post) {
+    if (err) {
+      return next(err);
+    }
+    res.json(post);
+  });
+});
+
+// delete a question
+router.delete("/questions/:id", function(req, res, next) {
+  book.findByIdAndRemove(req.params.id, req.body, function(err, post) {
+    if (err) {
+      return next(err);
+    }
+    res.json(post);
+  });
+});
+/*======================================================================================*/
+
+/*============================== Reply =============================================*/
+//create a reply
+router.post("/reply", (req, res, next) => {
+  //emailId = req.body.emailId;
+  reply.create(req.body, (err, post) => {
+    if (err) {
+      return next(err);
+    }
+    res.json(post);
+  });
+});
+
+//get all replies
+router.get("/reply", function(req, res, next) {
+  reply.find({}, function(err, ques) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    } else {
+      res.json(ques);
+    }
+  });
+});
+
+//get a reply
+router.get("/reply/:id", function(req, res, next) {
+  reply.findById(req.params.id, function(err, post) {
+    if (err) {
+      return next(err);
+    }
+    res.json(post);
+  });
+});
+
+//update a reply
+router.put("/reply/:id", function(req, res, next) {
+  reply.findByIdAndUpdate(req.params.id, req.body, function(err, post) {
+    if (err) {
+      return next(err);
+    }
+    res.json(post);
+  });
+});
+
+// delete a reply
+router.delete("/reply/:id", function(req, res, next) {
+  reply.findByIdAndRemove(req.params.id, req.body, function(err, post) {
+    if (err) {
+      return next(err);
+    }
+    res.json(post);
+  });
+});
+/*======================================================================================*/
 
 // authentication
 router.post('/register', ctrlAuth.register);

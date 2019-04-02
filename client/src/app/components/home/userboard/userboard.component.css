@@ -35,3 +35,60 @@
     font-size: 20px;
     border-radius: 15px;
 }
+
+/*new stuff*/
+.myUL {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.myUL li a {
+    border: 1px solid #ddd; /* Add a border to all links */
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6; /* Grey background color */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    font-size: 18px; /* Increase the font-size */
+    color: black; /* Add a black text color */
+    display: block; /* Make it into a block element to fill the whole list */
+}
+  
+.myUL li a:hover:not(.header) {
+    background-color: #eee; /* Add a hover effect to all links, except for headers */
+}
+/**/
+
+/*Newer stuff*/
+#custom-search-input{
+    padding: 3px;
+    border: solid 1px #E4E4E4;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+}
+
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
+}

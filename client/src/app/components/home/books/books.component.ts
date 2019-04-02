@@ -14,10 +14,10 @@ export class BooksComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private auth: AuthenticationService) { }
 
   ngOnInit() {
-    this.getBookDetailes(this.route.snapshot.params['id']);
+    this.getBookDetails(this.route.snapshot.params['id']);
   }
 
-  getBookDetailes(id){
+  getBookDetails(id){
     this.auth.getBook(id).subscribe(data => {
       console.log(data);
       this.book = data;

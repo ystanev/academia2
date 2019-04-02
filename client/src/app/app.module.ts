@@ -26,6 +26,9 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { PaymentComponent } from './components/home/payment/payment.component';
 import { BookDetailsComponent } from './components/home/book-details/book-details.component';
 import { BookViewComponent } from './components/home/book-view/book-view.component';
+import { QuestionsComponent } from './components/home/questions/questions.component';
+import { RepliesComponent } from './components/home/replies/replies.component';
+import { ShowQuestionsComponent } from './components/home/show-questions/show-questions.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { BookViewComponent } from './components/home/book-view/book-view.compone
     PaymentComponent,
     FilterPipe,
     BookDetailsComponent,
-    BookViewComponent
+    BookViewComponent,
+    QuestionsComponent,
+    RepliesComponent,
+    ShowQuestionsComponent
   ],
   imports: [
     BrowserModule,

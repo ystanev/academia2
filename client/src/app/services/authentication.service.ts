@@ -187,6 +187,60 @@ export class AuthenticationService {
     return this.request('get', 'books');
   }
 
+  /*============================== Questions =============================================*/
+  public addQuestion(questions): Observable<any> {
+    return this.http
+      .post("/api/questions", questions)
+      .pipe(catchError(this.handleError));
+  }
+
+  public getQuestion(qID): Observable<any> {
+    const url = `/api/questions/${qID}`;
+    return this.http.get(url);
+  }
+
+  public updateQuestion(qID, questions): Observable<any> {
+    const url = `/api/questions/${qID}`;
+    return this.http.put(url, questions);
+  }
+
+  public deleteQuestion(qID): Observable<any> {
+    const url = `/api/questions/${qID}`;
+    return this.http.delete(url);
+  }
+
+  public getAllQuestions(): Observable<any> {
+    return this.http.get('/api/questions').pipe(catchError(this.handleError));
+  }
+  /*======================================================================================*/
+
+  /*============================== Replies =============================================*/
+  public addReply(replies): Observable<any> {
+    return this.http
+      .post("/api/replies", replies)
+      .pipe(catchError(this.handleError));
+  }
+
+  public getReply(qID): Observable<any> {
+    const url = `/api/replies/${qID}`;
+    return this.http.get(url);
+  }
+
+  public updateReply(qID, replies): Observable<any> {
+    const url = `/api/replies/${qID}`;
+    return this.http.put(url, replies);
+  }
+
+  public deleteReply(qID): Observable<any> {
+    const url = `/api/replies/${qID}`;
+    return this.http.delete(url);
+  }
+
+  /* public getAllQuestions(): Observable<any> {
+    return this.http.get("api/questions");
+  } */
+  /*======================================================================================*/
+
   public logout(): void {
     this.token = '';
     window.localStorage.removeItem('mean-token');

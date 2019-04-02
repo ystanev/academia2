@@ -35,7 +35,7 @@ const routes: Routes = [
     { path: 'bookDetails/:id', component: BookDetailsComponent},
     { path: 'book-view/:id', component: BookViewComponent},
     { path: 'questions', component: QuestionsComponent},
-    { path: 'replies', component: RepliesComponent},
+    { path: 'replies/:id', component: RepliesComponent},
     { path: 'show-questions', component: ShowQuestionsComponent}
   ],  canActivate: [AuthGuardService] },
 

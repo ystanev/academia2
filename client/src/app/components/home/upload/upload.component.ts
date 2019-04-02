@@ -77,7 +77,7 @@ export class UploadComponent implements OnInit {
         bookPath: data.bookPath});
       console.log(data.bookPath);*/
 
-      /*let userDetails = this.auth.getUserDetails()
+      let userDetails = this.auth.getUserDetails()
       let userId = userDetails._id;
       let bookId = data._id;
 
@@ -102,9 +102,7 @@ export class UploadComponent implements OnInit {
         }
       }, (err) => {
         console.log(err);
-      });*/
-
-
+      });
       
     }, (err) => {
       console.log(err);

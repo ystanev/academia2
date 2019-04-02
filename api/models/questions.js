@@ -1,10 +1,9 @@
 var mongoose = require( 'mongoose' );
 
 var questionsSchema = new mongoose.Schema({
-  email: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+   email: {
+    type: String,
+    ref: 'User'
    },
    bookTitle: {
        type: String,

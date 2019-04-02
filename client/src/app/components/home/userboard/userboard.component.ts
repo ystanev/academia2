@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService, UserDetails } from '../../../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-userboard',
@@ -8,6 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./userboard.component.css']
 })
 export class UserboardComponent implements OnInit {
+
+  searchText: any;
 
   details: UserDetails;
   allBooks: any;
@@ -19,7 +23,8 @@ export class UserboardComponent implements OnInit {
   booksAvailable:boolean = false;
   booksAvailableMsg:boolean = false;
   
-  constructor(private auth: AuthenticationService, private router: Router) { }
+  constructor
+  (private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit(){
     this.auth.profile().subscribe(user => {
@@ -74,4 +79,5 @@ export class UserboardComponent implements OnInit {
     console.log(id);
     this.router.navigate(['/home/book-view', id]);
   }
+  
 }

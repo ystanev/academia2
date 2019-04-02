@@ -1,0 +1,29 @@
+<form [formGroup]="discussion">
+  <label>
+    Book Title: <br />
+    <input type="text" formControlName="bookTitle" />
+  </label>
+
+  <br />
+
+  <label>
+    Question: <br />
+    <textarea
+      name="question"
+      id="question"
+      cols="30"
+      rows="10"
+      formControlName="question"
+    >
+    </textarea>
+  </label>
+
+  <!-- <p>Value: {{question.value}}</p> -->
+</form>
+
+<form [formGroup]="discussion" (ngSubmit)="postQuestion(discussion.value)">
+  <button type="submit">Submit</button>
+
+  <!-- <form [formGroup]="discussion" (ngSubmit)="onReply()">
+<button type="submit">Reply</button> -->
+</form>

@@ -1,4 +1,4 @@
-<h2>{{book.bookName}}</h2>
+<h2>{{book?.bookName}}</h2>
 
 <div *ngIf="isLoaded" style="text-align: center;">
   <button (click)="prevPage()" [disabled]="page === 1">Prev</button>

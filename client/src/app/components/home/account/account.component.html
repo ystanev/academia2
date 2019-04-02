@@ -44,41 +44,45 @@
     </mat-tab>
 
     <mat-tab label="Books">
-      <h3>All Books</h3>
-      <table class="table" style="margin-left:-15px;">
+      <h3>Subscibed Books</h3>
+      <table class="table" style="margin-left:-1px;">
         <thead class="thead-dark">
           <tr>
             <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">Name</th>
             <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">Author</th>
             <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">ISBN #</th>
-            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">Course ID</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let items of allBooks; let i = index;">
-            <td>{{items.bookName}}</td>
-            <td>{{items.bookAuthor}}</td>
-            <td>{{items.bookIsbn}}</td>
+          <tr *ngFor="let items of subBooks; let i = index;">
+            <td>{{items?.bookName}}</td>
+            <td>{{items?.bookAuthor}}</td>
+            <td>{{items?.bookIsbn}}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br/>
+      <br/>
+      <h3>Uploaded Books</h3>
+      <table class="table" style="margin-left:-1px;">
+        <thead class="thead-dark">
+          <tr>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">Name</th>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">Author</th>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">ISBN #</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let items of allBooks; let i = index;">
+          <tr *ngIf="items.uploadedBy == details._id">
+            <td>{{items?.bookName}}</td>
+            <td>{{items?.bookAuthor}}</td>
+            <td>{{items?.bookIsbn}}</td>
             <td></td>
           </tr>
         </tbody>
       </table>
     </mat-tab>
-    <mat-tab label="Settings">
-      <!--<mat-form-field class="example-full-width">
-        <textarea matInput placeholder="password" formControlName="password"
-               [errorStateMatcher]="matcher"></textarea>
-        <mat-error>
-          <span *ngIf="!userForm.get('password').valid && userForm.get('password').touched">Please enter Book Description</span>
-        </mat-error>
-      </mat-form-field>-->
-      <!--<mat-form-field class="example-full-width">
-        <input matInput placeholder="newPassword" formControlName="newPassword"
-               [errorStateMatcher]="matcher">
-        <mat-error>
-          <span *ngIf="!userForm.get('newPassword').valid && userForm.get('newPassword').touched">Please enter Publisher</span>
-        </mat-error>
-      </mat-form-field>-->
-    </mat-tab>
+   
   </mat-tab-group>
 </div>

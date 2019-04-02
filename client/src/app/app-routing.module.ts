@@ -15,6 +15,9 @@ import { UploadComponent } from './components/home/upload/upload.component';
 import { PaymentComponent } from './components/home/payment/payment.component';
 import { BookDetailsComponent } from './components/home/book-details/book-details.component';
 import { BookViewComponent } from './components/home/book-view/book-view.component';
+import { QuestionsComponent } from './components/home/questions/questions.component';
+import { RepliesComponent } from './components/home/replies/replies.component';
+import { ShowQuestionsComponent } from './components/home/show-questions/show-questions.component';
 
 
 import { AuthGuardService } from './services/auth-guard.service';
@@ -30,7 +33,10 @@ const routes: Routes = [
     { path: 'upload', component: UploadComponent },
     { path: 'payment', component: PaymentComponent },
     { path: 'bookDetails/:id', component: BookDetailsComponent},
-    { path: 'book-view/:id', component: BookViewComponent}
+    { path: 'book-view/:id', component: BookViewComponent},
+    { path: 'questions', component: QuestionsComponent},
+    { path: 'replies', component: RepliesComponent},
+    { path: 'show-questions', component: ShowQuestionsComponent}
   ],  canActivate: [AuthGuardService] },
 
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children: [{

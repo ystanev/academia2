@@ -14,7 +14,7 @@ export class UploadComponent implements OnInit {
   id: any;
   allProgs:any;
   uID:any;
-  bookForm: FormGroup;
+  bookForm:FormGroup;
   bookIsbn:string='';
   bookName:string='';
   bookAuthor:string='';
@@ -28,7 +28,6 @@ export class UploadComponent implements OnInit {
     private auth: AuthenticationService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.getAllPrograms();
     this.auth.profile().subscribe(user => {
       this.bookForm = this.formBuilder.group({
         'bookIsbn' : [null, Validators.required],
@@ -40,6 +39,8 @@ export class UploadComponent implements OnInit {
         'uploadedBy' : user._id
       });
     });
+
+    this.getAllPrograms();
   }
 
   handleFileInput(files: FileList) {
@@ -58,12 +59,13 @@ export class UploadComponent implements OnInit {
   onFormSubmit(form: NgForm){
     this.uploadBook();
 
+    
     var fileName = "/api/public/upload/"+this.fileToUpload.name;
     //var path = "/api/public/upload/";
     this.bookPath = fileName;
 
     this.auth.addBook(form).subscribe(data => {
-      data.bookPath = this.bookPath;
+      //data.bookPath = this.bookPath;
       //var fileName = this.fileToUpload.name;
       //var path = "/api/public/upload/";
       //data.bookPath = path+fileName;
@@ -75,8 +77,35 @@ export class UploadComponent implements OnInit {
         bookPath: data.bookPath});
       console.log(data.bookPath);*/
 
-      let id = data['_id'];
-      this.router.navigate(['/home/books', id]);
+      /*let userDetails = this.auth.getUserDetails()
+      let userId = userDetails._id;
+      let bookId = data._id;
+
+      let subscription = {
+        "userId": userId,
+        "bookId": bookId 
+      };
+      
+      this.auth.addSubscription(subscription).subscribe(data1 => {
+        console.log(data1);
+        if(data1.alreadyExists != null && data1.alreadyExists){
+          //this.purchShowMsg = true;
+          
+          alert("Data Exists");
+        }else{
+          let id = data['_id'];
+          this.router.navigate(['/home/books', id]);
+          //this.purchShowMsg = false;
+          //this.router.navigate(['/home/userboard']);
+    
+        
+        }
+      }, (err) => {
+        console.log(err);
+      });*/
+
+
+      
     }, (err) => {
       console.log(err);
     });

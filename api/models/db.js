@@ -50,3 +50,5 @@ require('./users');
 require('./books');
 require('./programs');
 require('./subscription');
+require('./questions');
+require('./questions');

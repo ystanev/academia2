@@ -1,0 +1,16 @@
+<button>
+  <a [routerLink]="['/home/questions']">Post Question</a>
+</button>
+<br /><br />
+<div class="container" *ngFor="let item of ques">
+  <p>
+    {{ item?.bookTitle }}
+    <br />
+    {{ item?.question }}
+  </p>
+  <button (click)="showReplyArea()" id="reply">Reply</button> <br />
+  <br />
+  <div id="show_reply" *ngIf="replyArea">
+    <textarea name="" id="reply_text" cols="30" rows="10"></textarea>
+  </div>
+</div>

@@ -1,12 +1,12 @@
 <div>
-    <h2>{{book.bookName}}</h2>
+    <h2>{{book?.bookName}}</h2>
     <dl>
       <dt>ISBN:</dt>
-      <dd>{{book.bookIsbn}}</dd>
+      <dd>{{book?.bookIsbn}}</dd>
       <dt>Author:</dt>
-      <dd>{{book.bookAuthor}}</dd>
+      <dd>{{book?.bookAuthor}}</dd>
       <dt>Price:</dt>
-      <dd>{{book.bookPrice}}</dd>
+      <dd>{{book?.bookPrice}}</dd>
       <button mat-raised-button (click)="openPaypal();">Purchase</button>
       <h3 *ngIf="purchShowMsg" style="color:red;">Book already purchased :)</h3>
     </dl>

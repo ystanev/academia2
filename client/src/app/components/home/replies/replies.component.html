@@ -1,0 +1,30 @@
+<div class="container">
+<p>
+ {{ quest?.bookTitle }}
+          <br />
+          {{ quest?.question }}
+        </p>
+        <button (click)="showReplyArea()" id="reply">Reply</button> <br />
+        <br />
+        <div id="show_reply" *ngIf="replyArea">
+            <form [formGroup]="replyForm">
+                    <label>
+                            Reply: <br />
+                            <textarea
+                              name="question"
+                              id="reply"
+                              cols="30"
+                              rows="10"
+                              formControlName="reply"
+                            >
+                            </textarea>
+                          </label>
+            </form>
+          
+            <form [formGroup]="replyForm" (ngSubmit)="postReply(replyForm.value)">
+                    <button type="submit">Submit</button>
+                  
+                  
+                  </form>
+        </div>
+      </div>

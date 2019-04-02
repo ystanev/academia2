@@ -20,27 +20,38 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class RepliesComponent implements OnInit {
 
-  question = {};
+  quest: any;
+  
+  replyArea: boolean = false;
+
+  replyForm: FormGroup;
+  reply: String;
+  questionReply: String;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private formBuilder: FormBuilder
   ) {}
-  
-  discussion = new FormGroup({
-    bookTitle: new FormControl(""),
-    question: new FormControl("")
-  });
 
+  ngOnInit() {
+    this.viewQuestion(this.route.snapshot.params["id"]);
+    this.auth.getQuestion(this.route.snapshot.params["id"]).subscribe(ques => {
+      this.replyForm = this.formBuilder.group({
+        'reply': [''],
+        'question': ques._id
+      });
+    });
+  }
 
-  postQuestion(form: NgForm) {
+  postReply(form: NgForm) {
     let details = this.auth.getUserDetails();
     let email = details.email;
 
     this.auth.addQuestion(form).subscribe(ques => {
       console.log(ques);
-      let id = ques["_id"];
+      //let id = ques["_id"];
       // this.router.navigate(["/home/show_questions/"]);
     });
     //this.viewQuestion(this.route.snapshot.params['id']);
@@ -49,16 +60,25 @@ export class RepliesComponent implements OnInit {
   viewQuestion(id) {
     this.auth.getQuestion(id).subscribe(ques => {
       console.log(ques);
-      this.question = ques;
+      this.quest = ques;
     });
+  }
+
+  showReplyArea() {
+    this.replyArea = true;
+    //this.router.navigate(['/home/replies', id]);
   }
 
   /* onReply() {
     console.log(this.discussion.value);
   } */
 
-  ngOnInit() {
-    this.viewQuestion(this.route.snapshot.params["id"]);
+  replyQuestion(form: NgForm){
+
+    this.auth.addReply(form).subscribe(rep => {
+      console.log(rep);
+    });
+    this.router.navigate(['/home/show-questions']);
   }
 
 }

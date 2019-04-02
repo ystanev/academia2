@@ -8,9 +8,9 @@
     <br />
     {{ item?.question }}
   </p>
-  <button (click)="showReplyArea()" id="reply">Reply</button> <br />
+  <button (click)="showReplyArea(item?._id)" id="reply">View</button> <br />
   <br />
-  <div id="show_reply" *ngIf="replyArea">
+  <!--<div id="show_reply" *ngIf="replyArea">
     <textarea name="" id="reply_text" cols="30" rows="10"></textarea>
-  </div>
+  </div>-->
 </div>

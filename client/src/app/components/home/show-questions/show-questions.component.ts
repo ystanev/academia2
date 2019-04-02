@@ -30,11 +30,12 @@ export class ShowQuestionsComponent implements OnInit {
     });
   }
 
-  showReplyArea() {
-    this.replyArea = true;
+  showReplyArea(id) {
+    //this.replyArea = true;
+    this.router.navigate(['/home/replies', id]);
   }
 
-  
+
 
   /* showAllQuestions(id){
     this.auth.getQuestion(id).subscribe(data => {

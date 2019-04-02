@@ -20,29 +20,40 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class QuestionsComponent implements OnInit {
 
-  question = {};
+  discussion: FormGroup;
+  bookTitle: String;
+  question: String;
+  email: String;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private formBuilder: FormBuilder
   ) {}
   
-  discussion = new FormGroup({
-    bookTitle: new FormControl(""),
-    question: new FormControl(""),
+  ngOnInit() {
+    this.viewQuestion(this.route.snapshot.params["id"]);
+    this.auth.profile().subscribe(user => {
+      this.discussion = this.formBuilder.group({
+            'bookTitle': [''],
+            'question':[''],
+            'email': user.email
+          });
+    });
     
-  });
-
-
+  }
+  
   postQuestion(form: NgForm) {
     let details = this.auth.getUserDetails();
-    let email = details.email;
-
+    //let email = details.email;
+    
     this.auth.addQuestion(form).subscribe(ques => {
       console.log(ques);
       //let id = ques["_id"];
-      // this.router.navigate(["/home/show_questions/"]);
+      let id = ques._id;
+      
+      this.router.navigate(["/home/show_questions"]);
     });
     //this.viewQuestion(this.route.snapshot.params['id']);
   }
@@ -58,9 +69,7 @@ export class QuestionsComponent implements OnInit {
     console.log(this.discussion.value);
   } */
 
-  ngOnInit() {
-    this.viewQuestion(this.route.snapshot.params["id"]);
-  }
+  
 
 
 }

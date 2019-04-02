@@ -303,12 +303,32 @@ router.get('/subscription/:id', function(req, res) {
 /*============================== Questions =============================================*/
 //create a question
 router.post("/questions", (req, res, next) => {
-  //emailId = req.body.emailId;
+  
   question.create(req.body, (err, post) => {
     if (err) {
       return next(err);
+    }else{
+      reply.findOne({'question': req.body.id}, function(err, post){
+        if(err){
+          console.log(err);
+        }else {
+          if(post == null || post == undefined){
+            reply.create({'question': req.body.id}, function(err, rep){
+              if(err){
+                console.log(err);
+              }
+              else{
+                rep.question.push(req.body.id);
+                rep.save();
+                res.json(post);
+              }
+            });
+          }
+        }
+      });
+      //res.json(post);
     }
-    res.json(post);
+    
   });
 });
 

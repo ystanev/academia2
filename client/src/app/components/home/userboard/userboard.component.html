@@ -25,16 +25,16 @@
     }
   </style>
   
-  <!-- Search form -->
-  <div class="md-form">
-    <input class="form-control" [(ngModel)]="searchText" (focus)="searchForBooksFocusIn()" (focusout)="searchForBooksFocusOut()" style="margin-top:10px;margin-bottom: 10px;padding:25px;font-size: 20px;border-radius: 15px;" type="search" placeholder="Search" aria-label="Search" />
-      <div *ngIf="searchBoxClicked">
-        <ul *ngFor="let items of allBooks | filter: searchText">
-          <li>{{items.bookName}}</li>
-        </ul>
-      </div>
+  <!-- Search form-->
+  <div>
+    <input class="form-control search-bar" [(ngModel)]="searchText" (focus)="searchForBooksFocusIn()" (focusout)="searchForBooksFocusOut()"  type="search" placeholder="Search" aria-label="Search" />
+
+      <ul *ngIf="searchBoxClicked">
+         <li *ngFor="let items of allBooks | filter: searchText">{{items.bookName}}</li>
+      </ul>
+      
   </div>
-  
+
   <!-- BOOK CARDS -->
   <div class="container-fluid" style="overflow-x: scroll;">
     <h2>Subscribed Books</h2>

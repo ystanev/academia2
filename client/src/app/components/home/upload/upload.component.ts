@@ -75,8 +75,35 @@ export class UploadComponent implements OnInit {
         bookPath: data.bookPath});
       console.log(data.bookPath);*/
 
-      let id = data['_id'];
-      this.router.navigate(['/home/books', id]);
+      let userDetails = this.auth.getUserDetails()
+      let userId = userDetails._id;
+      let bookId = data._id;
+
+      let subscription = {
+        "userId": userId,
+        "bookId": bookId 
+      };
+
+      this.auth.addSubscription(subscription).subscribe(data1 => {
+        console.log(data1);
+        if(data1.alreadyExists != null && data1.alreadyExists){
+          //this.purchShowMsg = true;
+          
+          alert("Data Exists");
+        }else{
+          let id = data['_id'];
+          this.router.navigate(['/home/books', id]);
+          //this.purchShowMsg = false;
+          //this.router.navigate(['/home/userboard']);
+    
+        
+      }
+    }, (err) => {
+      console.log(err);
+    });
+
+
+      
     }, (err) => {
       console.log(err);
     });

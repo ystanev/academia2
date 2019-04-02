@@ -23,9 +23,18 @@
           <span *ngIf="!bookForm.get('bookAuthor').valid && bookForm.get('bookAuthor').touched">Please enter Book Author</span>
         </mat-error>
       </mat-form-field>
-      <select (change)="onChange($event)" formControlName="program" class="form-control col-lg-8">
-          <option *ngFor="let items of allProgs;" [value]="items._id">{{items.programName}}</option>    
-       </select>
+       <mat-form-field class="example-full-width col-lg-9">
+          <mat-label>Program</mat-label>
+          <mat-select (change)="onChange($event)" formControlName="program" [errorStateMatcher]="matcher">
+              <mat-option>--</mat-option>
+            <mat-option *ngFor="let items of allProgs;" [value]="items._id">
+                {{items?.programName}}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+              <span *ngIf="!bookForm.get('program').valid && bookForm.get('program').touched">Please select a Program</span>
+            </mat-error>
+        </mat-form-field>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Price" formControlName="bookPrice"
                [errorStateMatcher]="matcher">
